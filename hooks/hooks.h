@@ -36,12 +36,6 @@ LRESULT wnd_proc( const HWND hwnd, const UINT u_msg, const WPARAM w_param, const
 using fn_present = long( __stdcall* )( IDirect3DDevice9*, const RECT*, const RECT*, HWND, const RGNDATA* );
 fn_present o_present = nullptr;
 
-struct cMatrix
-{
-	D3DXMATRIX Matrix; //0x0000 
-	char _0x0040[1024];
-};
-
 long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, const RECT* p_dest_rect, HWND h_dest_window, const RGNDATA* p_dirty_region )
 {
 	static std::once_flag o_flag;
