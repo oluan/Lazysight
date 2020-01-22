@@ -29,10 +29,4 @@ public:
 	char pad_036C[160]; //0x036C
 	uint32_t m_slot1_ammo; //0x040C
 	uint32_t m_slot1_ammo2; //0x0410
-	char pad_0414[150]; //0x0414
-	uint32_t N000008AF; //0x04AA
-	uint32_t N000008B0; //0x04AE
-	char pad_04B2[52]; //0x04B2
-	uint32_t N000008BF; //0x04E6
-	char pad_04EA[2884]; //0x04EA
 }; //Size: 0x102E

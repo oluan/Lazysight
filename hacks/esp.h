@@ -5,7 +5,7 @@ extern ID3DXLine* g_line;
 
 namespace esp
 {
-	static void line_esp( CPlayer* pentity ) noexcept
+	static void line_esp( CActor* pentity ) noexcept
 	{
 		// draw class WIP
 		static D3DXVECTOR2 line_2d[2]{};
@@ -15,7 +15,6 @@ namespace esp
 		if ( !sdk::world_to_screen( pentity->m_head_coords , screen ) )
 			return;
 
-		printf("w2s ok\n");
 		g_line->SetWidth( 1.2f );
 		g_line->SetAntialias( true );
 		g_line->SetGLLines( true );

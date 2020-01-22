@@ -75,32 +75,36 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 	if ( !ironsight_base )
 		ironsight_base = reinterpret_cast< uintptr_t >( GetModuleHandle( nullptr ) );
 
-	// g_entity_manager 8B 0D ? ? ? ? 85 C9 74 15 83 C8 FF F0 0F C1 41 ? 48 75 0A 85 C9 74 06 8B 01 6A 01 FF 10 E8 ? ? ? ? 
-	auto pentity_mgr = *reinterpret_cast< CEntityManager** >( ironsight_base + 0xA88B30 );
+	if ( b_esp_line )
+	{	
+		// g_entity_manager 8B 0D ? ? ? ? 85 C9 74 15 83 C8 FF F0 0F C1 41 ? 48 75 0A 85 C9 74 06 8B 01 6A 01 FF 10 E8 ? ? ? ? 
+		auto pentity_mgr = *reinterpret_cast< CEntityManager** >( ironsight_base + 0xA88B30 );
 
-	if ( pentity_mgr )
-	{
-		const auto pentity_list = pentity_mgr->m_list;
-		if ( pentity_list )
+		if ( pentity_mgr )
 		{
-			auto pentity_node = pentity_list->m_head;
-			if ( pentity_node )
-			{
-				while ( pentity_node != reinterpret_cast< CEntityNode* >( pentity_list ) )
-				{
-					if ( pentity_node == nullptr ) continue;
-					
-					if ( b_esp_line )
-						esp::line_esp( pentity_node->m_instance );
+			//g_local_actor -> g_entity_manager + 0x4
+			const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
+			const auto pentity_list = pentity_mgr->m_list;
 
-					pentity_node = pentity_node->m_next;
+			if ( pentity_list )
+			{
+				auto pentity_node = pentity_list->m_head;
+
+				if ( pentity_node )
+				{
+					while ( pentity_node != reinterpret_cast< CEntityNode* >( pentity_list ) )
+					{
+						auto pentity = pentity_node->m_instance;
+
+						if ( pentity != plocal_actor && pentity->m_teamid != plocal_actor->m_teamid )
+							esp::line_esp( pentity );
+
+						pentity_node = pentity_node->m_next;
+					}
 				}
 			}
 		}
-
-		
 	}
-
 
 	ImGui::EndFrame();
 	ImGui::Render();
