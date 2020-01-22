@@ -18,7 +18,7 @@ public:
 	uint32_t N00000823; //0x027C
 	bool N00000824; //0x0280
 	char pad_0281[135]; //0x0281
-	uint32_t m_bullets2; //0x0308
+	uint32_t nlmao; //0x0308
 	char pad_030C[8]; //0x030C
 	uint32_t m_bullets; //0x0314
 	uint32_t m_bullets2; //0x0318

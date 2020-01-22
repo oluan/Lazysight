@@ -156,12 +156,14 @@
     <ClCompile Include="thirdparty\minhook\src\trampoline.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="hacks\esp.h" />
     <ClInclude Include="hooks\hooks.h" />
     <ClInclude Include="ironsight\entity_list.h" />
     <ClInclude Include="ironsight\entity_mgr.h" />
     <ClInclude Include="ironsight\entity_node.h" />
     <ClInclude Include="ironsight\player.h" />
     <ClInclude Include="ironsight\sdk.h" />
+    <ClInclude Include="ironsight\world_to_screen.h" />
     <ClInclude Include="ironsight\weapon_mgr.h" />
     <ClInclude Include="thirdparty\imgui\imconfig.h" />
     <ClInclude Include="thirdparty\imgui\imgui.h" />

@@ -55,6 +55,9 @@
     <Filter Include="hooks">
       <UniqueIdentifier>{24a246a3-aa4d-4a39-a08b-f914d1b19ffe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="hacks">
+      <UniqueIdentifier>{2f81bc81-472c-410f-84bb-e1a1e10398af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="thirdparty\imgui\imconfig.h">
@@ -122,6 +125,12 @@
     </ClInclude>
     <ClInclude Include="hooks\hooks.h">
       <Filter>hooks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\esp.h">
+      <Filter>hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\world_to_screen.h">
+      <Filter>ironsight</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
