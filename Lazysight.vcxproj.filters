@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="thirdparty\imgui\imgui.cpp">
+      <Filter>thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\imgui\imgui_demo.cpp">
+      <Filter>thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\imgui\imgui_draw.cpp">
+      <Filter>thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\imgui\imgui_impl_dx9.cpp">
+      <Filter>thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\imgui\imgui_impl_win32.cpp">
+      <Filter>thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\imgui\imgui_widgets.cpp">
+      <Filter>thirdparty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\minhook\src\buffer.c">
+      <Filter>thirdparty\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\minhook\src\hook.c">
+      <Filter>thirdparty\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\minhook\src\trampoline.c">
+      <Filter>thirdparty\minhook</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\minhook\src\hde\hde32.c">
+      <Filter>thirdparty\minhook\hde</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\minhook\src\hde\hde64.c">
+      <Filter>thirdparty\minhook\hde</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="thirdparty">
+      <UniqueIdentifier>{0afcb04d-db7b-4113-a4dd-717f156e65d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thirdparty\minhook">
+      <UniqueIdentifier>{cef70aef-8f16-4404-929d-0585dd0fe2f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thirdparty\imgui">
+      <UniqueIdentifier>{1d7102e4-a54b-452b-bdd5-5b0054d08d2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thirdparty\minhook\hde">
+      <UniqueIdentifier>{b5173e9d-44a5-4745-9b1c-386139c08aab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ironsight">
+      <UniqueIdentifier>{12665396-fa50-4b57-9b46-963f8068c782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hooks">
+      <UniqueIdentifier>{24a246a3-aa4d-4a39-a08b-f914d1b19ffe}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="thirdparty\imgui\imconfig.h">
+      <Filter>thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\imgui\imgui.h">
+      <Filter>thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\imgui\imgui_impl_dx9.h">
+      <Filter>thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\imgui\imgui_impl_win32.h">
+      <Filter>thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\imgui\imgui_internal.h">
+      <Filter>thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\imgui\imstb_rectpack.h">
+      <Filter>thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\imgui\imstb_textedit.h">
+      <Filter>thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\imgui\imstb_truetype.h">
+      <Filter>thirdparty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\minhook\src\buffer.h">
+      <Filter>thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\minhook\src\trampoline.h">
+      <Filter>thirdparty\minhook</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\minhook\src\hde\hde32.h">
+      <Filter>thirdparty\minhook\hde</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\minhook\src\hde\hde64.h">
+      <Filter>thirdparty\minhook\hde</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\minhook\src\hde\pstdint.h">
+      <Filter>thirdparty\minhook\hde</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\minhook\src\hde\table32.h">
+      <Filter>thirdparty\minhook\hde</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\minhook\src\hde\table64.h">
+      <Filter>thirdparty\minhook\hde</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\sdk.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\weapon_mgr.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\player.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\entity_node.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\entity_list.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\entity_mgr.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="hooks\hooks.h">
+      <Filter>hooks</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
