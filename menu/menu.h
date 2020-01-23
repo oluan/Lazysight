@@ -68,23 +68,23 @@ namespace menu
 	static void render() noexcept
 	{
 
-		static const auto add_item = [](const char* text, bool* option_toggle)
+		static const auto add_item = [](const char* text, bool* option_toggle , bool outgroup = false )
 		{
 			ImGui::Text( "%s", text );
-			ImGui::SameLine( 380 );
+			ImGui::SameLine( outgroup ? 370 : 360 );
 			ImGui::ToggleButton( text, option_toggle );
 		};
 
 		static const auto add_item_with_color = [](const char* id, bool* option_toggle, float* color_array)
 		{
 			add_item( id, option_toggle );
-			ImGui::SameLine( 350 );
+			ImGui::SameLine( 330 );
 			ImGui::ColorEdit3( id, color_array, ImGuiColorEditFlags_NoLabel | ImGuiColorEditFlags_NoInputs );
 		};
 
 		if ( b_render_menu )
 		{
-			ImGui::SetNextWindowSize( ImVec2( 415.f, 200.f ) );
+			ImGui::SetNextWindowSize( ImVec2( 415.f, 240.f ) );
 			if ( ImGui::Begin( "Lazysight" , nullptr , ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse |  ImGuiWindowFlags_NoResize ) )
 			{
 				static auto tab = 0;
@@ -99,11 +99,22 @@ namespace menu
 
 
 				ImGui::PushStyleVar( ImGuiStyleVar_FramePadding  , ImVec2( 5 , 2 ) );
+				ImGui::Text( " " ); // advanced spacing system
 				switch( tab )
 				{
 				case 0:
+
+					add_item("Activate", &config::visuals_toggle, true);
+					ImGui::Text(" ");
+
+					ImGui::BeginChild(1, ImVec2( 390 , 120 ) , true);
 					add_item_with_color( "ESP Line Enemy" , &config::b_enemy_line , config::enemy_line );
 					add_item_with_color( "ESP Line Team", &config::b_ally_line, config::ally_line );
+					add_item_with_color( "ESP Box 2D Enemy" , &config::b_enemy_box , config::enemy_box );
+					add_item_with_color( "ESP Box 2D Ally" , &config::b_ally_box , config::ally_box );
+					add_item_with_color( "ESP Name Enemy" , &config::b_enemy_name , config::enemy_name );
+					add_item_with_color( "ESP Name Ally" , &config::b_ally_name , config::ally_name );
+					ImGui::EndChild();
 
 					break;
 				case 1:

@@ -21,7 +21,7 @@ LRESULT wnd_proc( const HWND hwnd, const UINT u_msg, const WPARAM w_param, const
 {
 	extern LRESULT ImGui_ImplWin32_WndProcHandler( HWND, UINT, WPARAM, LPARAM );
 
-	if ( u_msg == WM_KEYDOWN && w_param == VK_INSERT )
+	if ( u_msg == WM_KEYUP && w_param == VK_INSERT )
 		b_render_menu = !b_render_menu;
 
 	if ( ImGui_ImplWin32_WndProcHandler( hwnd, u_msg, w_param, l_param ) )
@@ -59,7 +59,7 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 	if ( !ironsight_base )
 		ironsight_base = reinterpret_cast< uintptr_t >( GetModuleHandle( nullptr ) );
 
-	if ( config::b_ally_line || config::b_enemy_line )
+	if ( config::visuals_toggle )
 	{	
 		render::start();
 
@@ -87,7 +87,7 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 						{
 							esp::line_esp( pentity , b_isenemy );
 							esp::box2d( pentity , b_isenemy );
-
+							esp::name_esp( pentity , b_isenemy );
 						}
 
 						pentity_node = pentity_node->m_next;

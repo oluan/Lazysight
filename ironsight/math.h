@@ -15,6 +15,7 @@ public:
 	bool    operator== ( const Vector3& vec ) const { return this->x == vec.x && this->y == vec.y && this->z == vec.z; }
 	bool    operator!= ( const Vector3& vec ) const { return this->x != vec.x || this->y != vec.y || this->z != vec.z; }
 	Vector3 operator=  ( const Vector3& vec ) { this->x = vec.x; this->y = vec.y; this->z = vec.z; return *this; }
+	Vector3 operator-  ( const Vector3& vec  ) const { return Vector3(x - vec.x, y - vec.y, z - vec.z); };
 
 	float get_distance_x  ( const Vector3& vec ) const { return this->x - vec.x; }
 	float get_distance_y  ( const Vector3& vec ) const { return this->y - vec.y; }

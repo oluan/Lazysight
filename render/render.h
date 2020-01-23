@@ -31,12 +31,46 @@ namespace render
 		ImGui::PopStyleVar( 2 );
 	}
 
-	static void draw_line( D3DXVECTOR2 from , D3DXVECTOR2 to , float* col , float thickness = 1.0f ) noexcept
+	static void draw_line( D3DXVECTOR2 from , D3DXVECTOR2 to , float* col , const bool outlined = true , const float thickness = 1.0f ) noexcept
 	{
+		if ( outlined )
+		{
+			// original pos backup
+			const auto b_from = from, b_to = to;
+
+			from.x += 1;
+			from.y += 1;
+			to.x += 1;
+			to.y += 1;
+
+			ImGui::GetCurrentWindow()->DrawList->AddLine( from , to , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), thickness );
+
+			from.x -= 2;
+			to.x -= 2;
+
+			ImGui::GetCurrentWindow()->DrawList->AddLine( from , to , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), thickness );
+
+			from.x += 2;
+			from.y -= 2;
+			to.x += 2;
+			to.y -= 2;
+
+			ImGui::GetCurrentWindow()->DrawList->AddLine( from , to , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), thickness );
+
+			from.x -= 2;
+			to.x -= 2;
+
+			ImGui::GetCurrentWindow()->DrawList->AddLine( from , to , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), thickness );
+
+			from = b_from;
+			to = b_to;
+
+
+		}
 		ImGui::GetCurrentWindow()->DrawList->AddLine( from , to , ImGui::GetColorU32( col ), thickness );
 	}
 
-	static float draw_text( const std::string& text, const ImVec2& position, float size, float* color, bool center = true ) noexcept
+	static float draw_text( const std::string& text, ImVec2 pos, float size, float* color, bool center = true ) noexcept
 	{
 		ImGuiWindow* window = ImGui::GetCurrentWindow();
 
@@ -44,37 +78,52 @@ namespace render
 		std::stringstream stream(text);
 		std::string line;
 
-		float y = 0.0f;
-		int i = 0;
+		const auto text_size = ImGui::GetDefaultFont()->CalcTextSizeA(size, FLT_MAX, 0.0f, text.c_str());
+		if (center)
+			pos.x -= text_size.x / 2.0f;
 
-		while ( std::getline( stream, line ) )
+		// outline
+		window->DrawList->AddText(ImGui::GetDefaultFont(), size, ImVec2(pos.x + 1, pos.y + 1), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), text.c_str());
+		window->DrawList->AddText(ImGui::GetDefaultFont(), size, ImVec2(pos.x - 1, pos.y - 1), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), text.c_str());
+		window->DrawList->AddText(ImGui::GetDefaultFont(), size, ImVec2(pos.x + 1, pos.y - 1), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), text.c_str());
+		window->DrawList->AddText(ImGui::GetDefaultFont(), size, ImVec2(pos.x - 1, pos.y + 1), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), text.c_str());
+		
+		window->DrawList->AddText(ImGui::GetDefaultFont(), size, ImVec2(pos.x , pos.y ), ImGui::GetColorU32( color ), text.c_str());
+
+
+		return pos.y + text_size.y;
+
+	}
+
+	static void draw_box( float x , float y, float w, float h, float* col , bool outlined = true )
+	{
+		if ( outlined )
 		{
-			ImVec2 textSize = ImGui::GetDefaultFont()->CalcTextSizeA(size, FLT_MAX, 0.0f, line.c_str());
+			// original pos backup
+			const auto b_x = x, b_y = y;
 
-			if (center)
-			{
-				window->DrawList->AddText(ImGui::GetDefaultFont(), size, { (position.x - textSize.x / 2.0f) + 1.0f, (position.y + textSize.y * i) + 1.0f }, ImGui::GetColorU32({ 0.0f, 0.0f, 0.0f, 255 / 255.0f }), line.c_str());
-				window->DrawList->AddText(ImGui::GetDefaultFont(), size, { (position.x - textSize.x / 2.0f) - 1.0f, (position.y + textSize.y * i) - 1.0f }, ImGui::GetColorU32({ 0.0f, 0.0f, 0.0f, 255 / 255.0f }), line.c_str());
-				window->DrawList->AddText(ImGui::GetDefaultFont(), size, { (position.x - textSize.x / 2.0f) + 1.0f, (position.y + textSize.y * i) - 1.0f }, ImGui::GetColorU32({ 0.0f, 0.0f, 0.0f, 255 / 255.0f }), line.c_str());
-				window->DrawList->AddText(ImGui::GetDefaultFont(), size, { (position.x - textSize.x / 2.0f) - 1.0f, (position.y + textSize.y * i) + 1.0f }, ImGui::GetColorU32({ 0.0f, 0.0f, 0.0f, 255 / 255.0f }), line.c_str());
+			x += 1;
+			y += 1;
 
-				window->DrawList->AddText(ImGui::GetDefaultFont(), size, { position.x - textSize.x / 2.0f, position.y + textSize.y * i }, ImGui::GetColorU32(color), line.c_str());
-			}
-			else
-			{
-				window->DrawList->AddText(ImGui::GetDefaultFont(), size, { (position.x) + 1.0f, (position.y + textSize.y * i) + 1.0f }, ImGui::GetColorU32(color), line.c_str());
-				window->DrawList->AddText(ImGui::GetDefaultFont(), size, { (position.x) - 1.0f, (position.y + textSize.y * i) - 1.0f }, ImGui::GetColorU32(color), line.c_str());
-				window->DrawList->AddText(ImGui::GetDefaultFont(), size, { (position.x) + 1.0f, (position.y + textSize.y * i) - 1.0f }, ImGui::GetColorU32(color), line.c_str());
-				window->DrawList->AddText(ImGui::GetDefaultFont(), size, { (position.x) - 1.0f, (position.y + textSize.y * i) + 1.0f }, ImGui::GetColorU32(color), line.c_str());
+			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) );
 
-				window->DrawList->AddText(ImGui::GetDefaultFont(), size, { position.x, position.y + textSize.y * i }, ImGui::GetColorU32(color), line.c_str());
-			}
+			x -= 2;
 
-			y = position.y + textSize.y * (i + 1);
-			i++;
+			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) );
+
+			x += 2;
+			y -= 2;
+
+			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) );
+
+			x -= 2;
+
+			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) );
+
+			x = b_x;
+			y = b_y;
+
 		}
-
-		return y;
-
+		ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( col ) );
 	}
 }

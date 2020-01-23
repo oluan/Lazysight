@@ -5,7 +5,8 @@ D3DVIEWPORT9 g_view_port;
 namespace sdk
 {
 
-	static bool world_to_screen( Vector3 pos, D3DXVECTOR2& screen ) noexcept
+
+	static bool world_to_screen( Vector3 pos, Vector3& screen ) noexcept
 	{
 		static float view_matrix[16] = { 0 };
 		static auto ironsight_base = 0;
@@ -33,5 +34,19 @@ namespace sdk
 		screen.x = ( g_view_port.Width / 2 * ndc.x ) + ( ndc.x + g_view_port.Width / 2 );
 		screen.y = -( g_view_port.Height / 2 * ndc.y ) + ( ndc.y + g_view_port.Height / 2 );
 		return true;
+	}
+
+	[[nodiscard]] static bool world_to_screen( Vector3 pos, D3DXVECTOR2& out )
+	{
+		Vector3 _out = { out.x , out.y , 0 };
+		const auto b = world_to_screen( pos , _out );
+		out.x = _out.x;
+		out.y = _out.y;
+		return b;
+	}
+
+	[[nodiscard]] static bool world_to_screen( Vector3& pos )
+	{
+		return world_to_screen( pos , pos );
 	}
 }
