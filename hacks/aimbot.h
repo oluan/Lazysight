@@ -24,23 +24,31 @@ namespace aimbot
 
 				if ( pentity_node )
 				{
-					while ( pentity_node != reinterpret_cast< CEntityNode* >( pentity_list ) )
+					__try
 					{
-						auto pentity = pentity_node->m_instance;
-
-						if ( pentity != plocal_actor && pentity->m_vtable_ptr == plocal_actor->m_vtable_ptr &&
-							 pentity->is_alive() && pentity->m_teamid != plocal_actor->m_teamid )
+						while ( pentity_node != reinterpret_cast< CEntityNode* >( pentity_list ) )
 						{
-							auto distance = plocal_actor->m_head_coords.get_3d_distance( pentity->m_head_coords );
+							auto pentity = pentity_node->m_instance;
 
-							if ( distance < lowest_distance )
+							if ( pentity != plocal_actor && pentity->m_vtable_ptr == plocal_actor->m_vtable_ptr &&
+								pentity->is_alive() && pentity->m_teamid != plocal_actor->m_teamid )
 							{
-								lowest_distance = distance;
-								pnearest_entity = pentity;
-							}
-						}
+								auto distance = plocal_actor->m_head_coords.get_3d_distance( pentity->m_head_coords );
 
-						pentity_node = pentity_node->m_next;
+								if ( distance < lowest_distance )
+								{
+									lowest_distance = distance;
+									pnearest_entity = pentity;
+								}
+							}
+
+							pentity_node = pentity_node->m_next;
+						}
+					}
+					
+					__except ( EXCEPTION_EXECUTE_HANDLER )
+					{
+						return nullptr;
 					}
 				}
 			}

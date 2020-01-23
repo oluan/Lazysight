@@ -73,21 +73,29 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 
 				if ( pentity_node )
 				{
-					while ( pentity_node != reinterpret_cast< CEntityNode* >( pentity_list ) )
+					__try
 					{
-						auto pentity = pentity_node->m_instance;
-
-						if ( pentity != plocal_actor && pentity->m_vtable_ptr == plocal_actor->m_vtable_ptr &&
-							 pentity->is_alive() )
+						while ( pentity_node != reinterpret_cast< CEntityNode* >( pentity_list ) )
 						{
-							const auto b_isenemy = pentity->m_teamid != plocal_actor->m_teamid;
+							auto pentity = pentity_node->m_instance;
 
-							esp::line_esp( pentity , b_isenemy );
-							esp::box2d( pentity , b_isenemy );
-							esp::name_esp( pentity , b_isenemy );
+							if ( pentity != plocal_actor && pentity->m_vtable_ptr == plocal_actor->m_vtable_ptr &&
+								pentity->is_alive() )
+							{
+								const auto b_isenemy = pentity->m_teamid != plocal_actor->m_teamid;
+
+								esp::line_esp( pentity, b_isenemy );
+								esp::box2d( pentity, b_isenemy );
+								esp::name_esp( pentity, b_isenemy );
+							}
+
+							pentity_node = pentity_node->m_next;
 						}
+					}
 
-						pentity_node = pentity_node->m_next;
+					__except ( EXCEPTION_EXECUTE_HANDLER )
+					{
+						//nothing here
 					}
 				}
 			}

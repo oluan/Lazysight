@@ -146,6 +146,7 @@
   <ItemGroup>
     <ClCompile Include="config\config.cpp" />
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="thirdparty\helpers\helpers.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui_demo.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui_draw.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="math.h" />
     <ClInclude Include="menu\menu.h" />
     <ClInclude Include="render\render.h" />
+    <ClInclude Include="thirdparty\helpers\helpers.hpp" />
     <ClInclude Include="thirdparty\imgui\imconfig.h" />
     <ClInclude Include="thirdparty\imgui\imgui.h" />
     <ClInclude Include="thirdparty\imgui\imgui_impl_dx9.h" />

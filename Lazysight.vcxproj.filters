@@ -38,6 +38,9 @@
     <ClCompile Include="config\config.cpp">
       <Filter>config</Filter>
     </ClCompile>
+    <ClCompile Include="thirdparty\helpers\helpers.cpp">
+      <Filter>thirdparty\helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hacks\esp.h">
@@ -127,6 +130,9 @@
     <ClInclude Include="render\render.h">
       <Filter>render</Filter>
     </ClInclude>
+    <ClInclude Include="thirdparty\helpers\helpers.hpp">
+      <Filter>thirdparty\helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="hacks">
@@ -158,6 +164,9 @@
     </Filter>
     <Filter Include="render">
       <UniqueIdentifier>{92eab429-f0b5-4384-9a78-5d2e70e16ef4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thirdparty\helpers">
+      <UniqueIdentifier>{e5434b7e-ef4d-469b-8af0-15bf7c2d7ac3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
