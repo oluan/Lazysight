@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="config\config.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui.cpp" />
     <ClCompile Include="thirdparty\imgui\imgui_demo.cpp" />
@@ -159,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="hacks\aimbot.h" />
+    <ClInclude Include="config\config.h" />
     <ClInclude Include="hacks\esp.h" />
     <ClInclude Include="hooks\hooks.h" />
     <ClInclude Include="ironsight\entity_list.h" />
@@ -169,6 +171,8 @@
     <ClInclude Include="ironsight\world_to_screen.h" />
     <ClInclude Include="ironsight\weapon_mgr.h" />
     <ClInclude Include="math.h" />
+    <ClInclude Include="menu\menu.h" />
+    <ClInclude Include="render\render.h" />
     <ClInclude Include="thirdparty\imgui\imconfig.h" />
     <ClInclude Include="thirdparty\imgui\imgui.h" />
     <ClInclude Include="thirdparty\imgui\imgui_impl_dx9.h" />

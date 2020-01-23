@@ -1,30 +1,36 @@
 #pragma once
 #include "../ironsight/sdk.h"
-
-extern ID3DXLine* g_line;
+#include "../render/render.h"
+#include "../config/config.h"
 
 namespace esp
 {
-	static void line_esp( CActor* pentity ) noexcept
+	static void line_esp( CActor* pentity , bool is_enemy ) noexcept
 	{
-		// draw class WIP
-		static D3DXVECTOR2 line_2d[2]{};
-
 		D3DXVECTOR2 screen{};
 
-		if ( !sdk::world_to_screen( pentity->m_head_coords , screen ) )
+		if ( !sdk::world_to_screen( pentity->m_coordinates , screen ) )
 			return;
 
-		g_line->SetWidth( 1.2f );
-		g_line->SetAntialias( true );
-		g_line->SetGLLines( true );
+		
+		const auto p_vtable = pentity->m_vtable_ptr;
 
-		line_2d[0].x = 0;
-		line_2d[0].y = 0;
+		// TEMPORARY CODE FOR DEBUGGING FIXME
+		if ( *(DWORD*)p_vtable - (DWORD)GetModuleHandleA(nullptr) == 0x296a10 )
+		{
+			char buffer[255];
+			sprintf_s( buffer, "~le projectile" );
+			render::draw_text( buffer , ImVec2( screen.x , screen.y ) , 15.f , config::ally_line );
+		}
+		render::draw_line( { ImGui::GetIO().DisplaySize.x / 2 , ImGui::GetIO().DisplaySize.y }, screen , is_enemy ? config::enemy_line : config::ally_line );
+	}
 
-		line_2d[1].x = screen.x;
-		line_2d[1].y = screen.y;
+	static void box2d( CActor* pentity , bool is_enemy ) noexcept
+	{
 
-		g_line->Draw( line_2d, 2, D3DCOLOR_ARGB( 255, 0, 0, 0 ) );
+        const auto world_head = pentity->m_head_coords;
+        const auto world_foot = pentity->m_coordinates;
+
+		// todo
 	}
 }

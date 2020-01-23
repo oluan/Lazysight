@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -35,6 +35,9 @@
     <ClCompile Include="thirdparty\minhook\src\hde\hde64.c">
       <Filter>thirdparty\minhook\hde</Filter>
     </ClCompile>
+    <ClCompile Include="config\config.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="thirdparty">
@@ -57,6 +60,15 @@
     </Filter>
     <Filter Include="hacks">
       <UniqueIdentifier>{2f81bc81-472c-410f-84bb-e1a1e10398af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{7727c278-c7ea-49a0-9472-248d7323ae03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="menu">
+      <UniqueIdentifier>{12dfc7ad-5429-4db9-8fe3-afa55249046b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{d99807d2-a398-4f86-9f55-b0b74c340850}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +149,14 @@
     </ClInclude>
     <ClInclude Include="hacks\aimbot.h">
       <Filter>hacks</Filter>
+    <ClInclude Include="render\render.h">
+      <Filter>render</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\menu.h">
+      <Filter>menu</Filter>
+    </ClInclude>
+    <ClInclude Include="config\config.h">
+      <Filter>config</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

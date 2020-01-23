@@ -11,15 +11,14 @@
 #include "../ironsight/sdk.h"
 #include "../hacks/esp.h"
 #include "../hacks/aimbot.h"
+#include "../menu/menu.h"
 
 WNDPROC o_wndproc = nullptr;
+HWND g_hwnd = nullptr;
 bool b_render_menu = false;
 
 // temp
-ID3DXLine* g_line = nullptr;
-bool b_esp_line = false;
 bool b_aimbot   = false;
-
 
 LRESULT wnd_proc( const HWND hwnd, const UINT u_msg, const WPARAM w_param, const LPARAM l_param )
 {
@@ -42,38 +41,37 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 	static std::once_flag o_flag;
 	std::call_once( o_flag, [p_device]()
 	{
-		const auto s_hwnd = FindWindow( nullptr, TEXT( "ironsight - 1.4.383.63755" ) );
-		o_wndproc = reinterpret_cast< WNDPROC >( SetWindowLongPtr( s_hwnd, GWLP_WNDPROC, LONG_PTR( wnd_proc ) ) );
+		g_hwnd = FindWindow( nullptr, TEXT( "ironsight - 1.4.383.63755" ) );
+		o_wndproc = reinterpret_cast< WNDPROC >( SetWindowLongPtr( g_hwnd, GWLP_WNDPROC, LONG_PTR( wnd_proc ) ) );
 		extern D3DVIEWPORT9 g_view_port;
 		p_device->GetViewport( &g_view_port );
 		ImGui::CreateContext();
-		ImGui_ImplWin32_Init( s_hwnd );
+		ImGui_ImplWin32_Init( g_hwnd );
 		ImGui_ImplDX9_Init( p_device );
-		D3DXCreateLine( p_device, &g_line );
-	} );
+		menu::setup_style();
+	});
 
 	ImGui_ImplDX9_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
+	
+	menu::render();
 
-	if ( b_render_menu )
-	{
-		if ( ImGui::Begin( "Lazysight", nullptr, ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse ) )
-		{
-			ImGui::Checkbox( "ESP Line" , &b_esp_line );
-			ImGui::Checkbox( "Aimbot", &b_aimbot );
-			ImGui::End();
-		}
-	}
+	static auto ironsight_base = 0;
 
-	if ( b_esp_line )
+	if ( !ironsight_base )
+		ironsight_base = reinterpret_cast< uintptr_t >( GetModuleHandle( nullptr ) );
+
+	if ( config::b_ally_line || config::b_enemy_line )
 	{	
+		render::start();
+
 		// g_entity_manager 8B 0D ? ? ? ? 85 C9 74 15 83 C8 FF F0 0F C1 41 ? 48 75 0A 85 C9 74 06 8B 01 6A 01 FF 10 E8 ? ? ? ? 
 		auto pentity_mgr = *reinterpret_cast< CEntityManager** >( ironsight_base + 0xA88B30 );
 
 		if ( pentity_mgr )
 		{
-			//g_local_actor -> g_entity_manager + 0x4
+			// g_local_actor -> g_entity_manager + 0x4
 			const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
 			const auto pentity_list = pentity_mgr->m_list;
 
@@ -87,14 +85,21 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 					{
 						auto pentity = pentity_node->m_instance;
 
-						if ( pentity != plocal_actor && pentity->m_teamid != plocal_actor->m_teamid )
-							esp::line_esp( pentity );
+						const auto b_isenemy = pentity->m_teamid != plocal_actor->m_teamid;
+						if ( pentity != plocal_actor && pentity->is_alive() )
+						{
+							esp::line_esp( pentity , b_isenemy );
+							esp::box2d( pentity , b_isenemy );
+
+						}
 
 						pentity_node = pentity_node->m_next;
 					}
 				}
 			}
 		}
+
+		render::end();
 	}
 
 	if ( b_aimbot )
