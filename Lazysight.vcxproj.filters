@@ -132,5 +132,11 @@
     <ClInclude Include="ironsight\world_to_screen.h">
       <Filter>ironsight</Filter>
     </ClInclude>
+    <ClInclude Include="math.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\aimbot.h">
+      <Filter>hacks</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

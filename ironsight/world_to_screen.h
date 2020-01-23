@@ -5,7 +5,7 @@ D3DVIEWPORT9 g_view_port;
 namespace sdk
 {
 
-	static bool world_to_screen( D3DXVECTOR3 pos, D3DXVECTOR2& screen ) noexcept
+	static bool world_to_screen( Vector3 pos, D3DXVECTOR2& screen ) noexcept
 	{
 		static float view_matrix[16] = { 0 };
 		static auto ironsight_base = 0;

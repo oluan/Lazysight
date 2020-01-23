@@ -3,7 +3,7 @@ class CActor
 public:
 	void* m_vtable_ptr; //0x0000
 	char pad_0004[4]; //0x0004
-	D3DXVECTOR3 m_coordinates; //0x0008
+	Vector3 m_coordinates; //0x0008
 	char pad_0014[12]; //0x0014
 	D3DXVECTOR2 m_view_angles; //0x0020
 	char pad_0028[12]; //0x0028
@@ -11,7 +11,7 @@ public:
 	char pad_003C[8]; //0x003C
 	float m_health; //0x0044
 	char pad_0048[12]; //0x0048
-	D3DXVECTOR3 m_coordinates2; //0x0054
+	Vector3 m_coordinates2; //0x0054
 	char pad_0060[72]; //0x0060
 	uint32_t random_1; //0x00A8
 	char pad_00AC[4]; //0x00AC
@@ -69,7 +69,7 @@ public:
 	char pad_02EC[60]; //0x02EC
 	float N00000122; //0x0328
 	char pad_032C[60]; //0x032C
-	D3DXVECTOR3 m_head_coords; //0x0368
+	Vector3 m_head_coords; //0x0368
 	char pad_0374[148]; //0x0374
 	uint32_t random_12; //0x0408
 	char pad_040C[1052]; //0x040C
@@ -80,4 +80,6 @@ public:
 	char pad_0870[88]; //0x0870
 	uint8_t random_14; //0x08C8
 	uint8_t m_teamid; //0x08C9
+
+	inline bool is_alive() const { return this->m_health > 0.0f; }
 }; //Size: 0x08CA

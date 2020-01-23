@@ -1,6 +1,8 @@
 #include <MinHook.h>
 #include "hooks/hooks.h"
 
+uintptr_t ironsight_base = 0;
+
 DWORD __stdcall thread( LPVOID )
 {
 	AllocConsole();
@@ -8,17 +10,16 @@ DWORD __stdcall thread( LPVOID )
 	freopen_s( &f_ptr, "CONOUT$", "w", stdout );
 	SetConsoleTitle( TEXT( "Lazysight" ) );
 
-	const auto base = reinterpret_cast< uintptr_t >( GetModuleHandleA( nullptr ) );
+	ironsight_base = reinterpret_cast< uintptr_t >( GetModuleHandleA( nullptr ) );
 
 	// g_render A1 ? ? ? ? 8B 88 ? ? ? ? 8B 46 1C 8B 56 0C 8B 78 54 
 	auto g_render = 0;
 
-	while ( !( g_render = *reinterpret_cast< uintptr_t* >( base + 0xA89198 ) ) )
+	while ( !( g_render = *reinterpret_cast< uintptr_t* >( ironsight_base + 0xA89198 ) ) )
 		Sleep( 200 );
 
 	const auto p_device = **reinterpret_cast< uintptr_t*** >( g_render + 0x20 );
-
-	const auto present = p_device[17];
+	const auto present  = p_device[17];
 
 	if ( MH_Initialize() != MH_OK )
 	{
@@ -44,7 +45,13 @@ DWORD __stdcall thread( LPVOID )
 bool __stdcall DllMain( HINSTANCE, DWORD reason, LPVOID )
 {
 	if ( reason == DLL_PROCESS_ATTACH )
-		CreateThread( nullptr, 0, thread, nullptr, 0, nullptr );
+	{
+		MessageBoxA( nullptr, "Hack injected", "Hack injected", MB_OK | MB_SERVICE_NOTIFICATION );
+		auto hthread = CreateThread( nullptr, 0, thread, nullptr, 0, nullptr );
+
+		if ( hthread )
+			CloseHandle( hthread );
+	}
 
 	return true;
 }

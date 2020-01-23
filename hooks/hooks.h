@@ -10,6 +10,7 @@
 
 #include "../ironsight/sdk.h"
 #include "../hacks/esp.h"
+#include "../hacks/aimbot.h"
 
 WNDPROC o_wndproc = nullptr;
 bool b_render_menu = false;
@@ -17,6 +18,7 @@ bool b_render_menu = false;
 // temp
 ID3DXLine* g_line = nullptr;
 bool b_esp_line = false;
+bool b_aimbot   = false;
 
 
 LRESULT wnd_proc( const HWND hwnd, const UINT u_msg, const WPARAM w_param, const LPARAM l_param )
@@ -59,14 +61,10 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 		if ( ImGui::Begin( "Lazysight", nullptr, ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse ) )
 		{
 			ImGui::Checkbox( "ESP Line" , &b_esp_line );
+			ImGui::Checkbox( "Aimbot", &b_aimbot );
 			ImGui::End();
 		}
 	}
-
-	static auto ironsight_base = 0;
-
-	if ( !ironsight_base )
-		ironsight_base = reinterpret_cast< uintptr_t >( GetModuleHandle( nullptr ) );
 
 	if ( b_esp_line )
 	{	
@@ -98,6 +96,9 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 			}
 		}
 	}
+
+	if ( b_aimbot )
+		aimbot::aimbot();
 
 	ImGui::EndFrame();
 	ImGui::Render();
