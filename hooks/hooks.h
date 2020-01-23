@@ -54,11 +54,6 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 	
 	menu::render();
 
-	static auto ironsight_base = 0;
-
-	if ( !ironsight_base )
-		ironsight_base = reinterpret_cast< uintptr_t >( GetModuleHandle( nullptr ) );
-
 	if ( config::visuals_toggle )
 	{	
 		render::start();

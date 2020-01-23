@@ -9,9 +9,6 @@ namespace sdk
 	static bool world_to_screen( Vector3 pos, Vector3& screen ) noexcept
 	{
 		static float view_matrix[16] = { 0 };
-		static auto ironsight_base = 0;
-
-		if ( !ironsight_base ) ironsight_base = reinterpret_cast< uintptr_t >( GetModuleHandle( nullptr ) );
 
 		// g_matrix 03 05 ? ? ? ? 50
 		const auto matrix = *reinterpret_cast< D3DXMATRIX* >( *reinterpret_cast< uintptr_t* >( ironsight_base + 0xA91D10 ) );

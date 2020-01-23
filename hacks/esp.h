@@ -19,7 +19,7 @@ namespace esp
 		const auto p_vtable = pentity->m_vtable_ptr;
 
 		// TEMPORARY CODE FOR DEBUGGING FIXME
-		if ( *(DWORD*)p_vtable - (DWORD)GetModuleHandleA(nullptr) == 0x296a10 )
+		if ( *(DWORD*)p_vtable - ironsight_base == 0x296a10 )
 		{
 		/*	char buffer[255];
 			sprintf_s( buffer, "~le object" );
