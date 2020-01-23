@@ -10,6 +10,7 @@ namespace esp
 		if ( is_enemy && !config::b_enemy_line ) return;
 		if ( !is_enemy && !config::b_ally_line ) return;
 
+
 		D3DXVECTOR2 screen{};
 
 		if ( !sdk::world_to_screen( pentity->m_coordinates , screen ) )

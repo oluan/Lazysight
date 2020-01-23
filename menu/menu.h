@@ -71,7 +71,7 @@ namespace menu
 		static const auto add_item = [](const char* text, bool* option_toggle , bool outgroup = false )
 		{
 			ImGui::Text( "%s", text );
-			ImGui::SameLine( outgroup ? 370 : 360 );
+			ImGui::SameLine( outgroup ? 370.0f : 360.0f );
 			ImGui::ToggleButton( text, option_toggle );
 		};
 
