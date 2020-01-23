@@ -178,6 +178,8 @@ typedef unsigned short      ImU16;  // 16-bit unsigned integer
 typedef signed int          ImS32;  // 32-bit signed integer == int
 typedef unsigned int        ImU32;  // 32-bit unsigned integer (often used to store packed colors)
 #if defined(_MSC_VER) && !defined(__clang__)
+#include <d3d9.h>
+#include <d3dx9.h>
 typedef signed   __int64    ImS64;  // 64-bit signed integer (pre and post C++11 with Visual Studio)
 typedef unsigned __int64    ImU64;  // 64-bit unsigned integer (pre and post C++11 with Visual Studio)
 #elif (defined(__clang__) || defined(__GNUC__)) && (__cplusplus < 201100)
@@ -194,6 +196,7 @@ struct ImVec2
 {
     float     x, y;
     ImVec2()  { x = y = 0.0f; }
+    ImVec2(D3DXVECTOR2 vec) { x = vec.x; y = vec.y; }
     ImVec2(float _x, float _y) { x = _x; y = _y; }
     float  operator[] (size_t idx) const { IM_ASSERT(idx <= 1); return (&x)[idx]; }    // We very rarely use this [] operator, the assert overhead is fine.
     float& operator[] (size_t idx)       { IM_ASSERT(idx <= 1); return (&x)[idx]; }    // We very rarely use this [] operator, the assert overhead is fine.
@@ -339,6 +342,7 @@ namespace ImGui
     IMGUI_API float         GetFontSize();                                                  // get current font size (= height in pixels) of current font with current scale applied
     IMGUI_API ImVec2        GetFontTexUvWhitePixel();                                       // get UV coordinate for a while pixel, useful to draw custom shapes via the ImDrawList API
     IMGUI_API ImU32         GetColorU32(ImGuiCol idx, float alpha_mul = 1.0f);              // retrieve given style color with style alpha applied and optional extra alpha multiplier
+    IMGUI_API ImU32         GetColorU32(float* col);
     IMGUI_API ImU32         GetColorU32(const ImVec4& col);                                 // retrieve given color with style alpha applied
     IMGUI_API ImU32         GetColorU32(ImU32 col);                                         // retrieve given color with style alpha applied
 
@@ -417,6 +421,7 @@ namespace ImGui
     // - Most widgets return true when the value has been changed or when pressed/selected
     // - You may also use one of the many IsItemXXX functions (e.g. IsItemActive, IsItemHovered, etc.) to query widget state.
     IMGUI_API bool          Button(const char* label, const ImVec2& size = ImVec2(0,0));    // button
+    IMGUI_API void          ToggleButton(const char* str_id, bool* v);
     IMGUI_API bool          SmallButton(const char* label);                                 // button with FramePadding=(0,0) to easily embed within text
     IMGUI_API bool          InvisibleButton(const char* str_id, const ImVec2& size);        // button behavior without the visuals, frequently useful to build custom behaviors using the public api (along with IsItemActive, IsItemHovered, etc.)
     IMGUI_API bool          ArrowButton(const char* str_id, ImGuiDir dir);                  // square button with an arrow shape
