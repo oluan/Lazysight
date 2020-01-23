@@ -11,8 +11,8 @@ namespace sdk
 		static float view_matrix[16] = { 0 };
 
 		// g_matrix 03 05 ? ? ? ? 50
-		const auto matrix = *reinterpret_cast< D3DXMATRIX* >( *reinterpret_cast< uintptr_t* >( ironsight_base + 0xA91D10 ) );
-		memcpy( &view_matrix, matrix , sizeof D3DXMATRIX );
+		const auto matrix = *reinterpret_cast< D3DXMATRIX** >( *reinterpret_cast< uintptr_t* >( ironsight_base + 0xA91D10 ) );
+		memcpy( &view_matrix, matrix, sizeof D3DXMATRIX );
 
 		D3DXVECTOR4 clip_coords = { };
 		clip_coords.x = pos.x * view_matrix[0] + pos.y * view_matrix[1] + pos.z * view_matrix[2] + view_matrix[3];
