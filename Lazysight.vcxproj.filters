@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -144,6 +144,11 @@
     <ClInclude Include="ironsight\world_to_screen.h">
       <Filter>ironsight</Filter>
     </ClInclude>
+    <ClInclude Include="math.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\aimbot.h">
+      <Filter>hacks</Filter>
     <ClInclude Include="render\render.h">
       <Filter>render</Filter>
     </ClInclude>

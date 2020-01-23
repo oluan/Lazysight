@@ -30,6 +30,7 @@
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
+    <SpectreMitigation>false</SpectreMitigation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -37,6 +38,7 @@
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <SpectreMitigation>false</SpectreMitigation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -157,6 +159,7 @@
     <ClCompile Include="thirdparty\minhook\src\trampoline.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="hacks\aimbot.h" />
     <ClInclude Include="config\config.h" />
     <ClInclude Include="hacks\esp.h" />
     <ClInclude Include="hooks\hooks.h" />
@@ -167,6 +170,7 @@
     <ClInclude Include="ironsight\sdk.h" />
     <ClInclude Include="ironsight\world_to_screen.h" />
     <ClInclude Include="ironsight\weapon_mgr.h" />
+    <ClInclude Include="math.h" />
     <ClInclude Include="menu\menu.h" />
     <ClInclude Include="render\render.h" />
     <ClInclude Include="thirdparty\imgui\imconfig.h" />

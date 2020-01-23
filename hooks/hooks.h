@@ -10,11 +10,15 @@
 
 #include "../ironsight/sdk.h"
 #include "../hacks/esp.h"
+#include "../hacks/aimbot.h"
 #include "../menu/menu.h"
 
 WNDPROC o_wndproc = nullptr;
 HWND g_hwnd = nullptr;
 bool b_render_menu = false;
+
+// temp
+bool b_aimbot   = false;
 
 LRESULT wnd_proc( const HWND hwnd, const UINT u_msg, const WPARAM w_param, const LPARAM l_param )
 {
@@ -28,7 +32,6 @@ LRESULT wnd_proc( const HWND hwnd, const UINT u_msg, const WPARAM w_param, const
 
 	return CallWindowProc( o_wndproc, hwnd, u_msg, w_param, l_param );
 }
-
 
 using fn_present = long( __stdcall* )( IDirect3DDevice9*, const RECT*, const RECT*, HWND, const RGNDATA* );
 fn_present o_present = nullptr;
@@ -98,6 +101,9 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 
 		render::end();
 	}
+
+	if ( b_aimbot )
+		aimbot::aimbot();
 
 	ImGui::EndFrame();
 	ImGui::Render();
