@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
@@ -20,58 +20,59 @@
     <ClCompile Include="thirdparty\imgui\imgui_widgets.cpp">
       <Filter>thirdparty\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="thirdparty\minhook\src\buffer.c">
-      <Filter>thirdparty\minhook</Filter>
+    <ClCompile Include="thirdparty\minhook\src\hde\hde64.c">
+      <Filter>thirdparty\minhook\hde</Filter>
     </ClCompile>
-    <ClCompile Include="thirdparty\minhook\src\hook.c">
+    <ClCompile Include="thirdparty\minhook\src\hde\hde32.c">
+      <Filter>thirdparty\minhook\hde</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\minhook\src\buffer.c">
       <Filter>thirdparty\minhook</Filter>
     </ClCompile>
     <ClCompile Include="thirdparty\minhook\src\trampoline.c">
       <Filter>thirdparty\minhook</Filter>
     </ClCompile>
-    <ClCompile Include="thirdparty\minhook\src\hde\hde32.c">
-      <Filter>thirdparty\minhook\hde</Filter>
-    </ClCompile>
-    <ClCompile Include="thirdparty\minhook\src\hde\hde64.c">
-      <Filter>thirdparty\minhook\hde</Filter>
+    <ClCompile Include="thirdparty\minhook\src\hook.c">
+      <Filter>thirdparty\minhook</Filter>
     </ClCompile>
     <ClCompile Include="config\config.cpp">
       <Filter>config</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="thirdparty">
-      <UniqueIdentifier>{0afcb04d-db7b-4113-a4dd-717f156e65d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="thirdparty\minhook">
-      <UniqueIdentifier>{cef70aef-8f16-4404-929d-0585dd0fe2f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="thirdparty\imgui">
-      <UniqueIdentifier>{1d7102e4-a54b-452b-bdd5-5b0054d08d2a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="thirdparty\minhook\hde">
-      <UniqueIdentifier>{b5173e9d-44a5-4745-9b1c-386139c08aab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ironsight">
-      <UniqueIdentifier>{12665396-fa50-4b57-9b46-963f8068c782}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hooks">
-      <UniqueIdentifier>{24a246a3-aa4d-4a39-a08b-f914d1b19ffe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="hacks">
-      <UniqueIdentifier>{2f81bc81-472c-410f-84bb-e1a1e10398af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="render">
-      <UniqueIdentifier>{7727c278-c7ea-49a0-9472-248d7323ae03}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="menu">
-      <UniqueIdentifier>{12dfc7ad-5429-4db9-8fe3-afa55249046b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="config">
-      <UniqueIdentifier>{d99807d2-a398-4f86-9f55-b0b74c340850}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="hacks\esp.h">
+      <Filter>hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\aimbot.h">
+      <Filter>hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\entity_list.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\entity_mgr.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\entity_node.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="math.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\player.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\weapon_mgr.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\world_to_screen.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\sdk.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\imgui\imstb_truetype.h">
+      <Filter>thirdparty\imgui</Filter>
+    </ClInclude>
     <ClInclude Include="thirdparty\imgui\imconfig.h">
       <Filter>thirdparty\imgui</Filter>
     </ClInclude>
@@ -93,8 +94,20 @@
     <ClInclude Include="thirdparty\imgui\imstb_textedit.h">
       <Filter>thirdparty\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="thirdparty\imgui\imstb_truetype.h">
-      <Filter>thirdparty\imgui</Filter>
+    <ClInclude Include="thirdparty\minhook\src\hde\table32.h">
+      <Filter>thirdparty\minhook\hde</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\minhook\src\hde\table64.h">
+      <Filter>thirdparty\minhook\hde</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\minhook\src\hde\pstdint.h">
+      <Filter>thirdparty\minhook\hde</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\minhook\src\hde\hde64.h">
+      <Filter>thirdparty\minhook\hde</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\minhook\src\hde\hde32.h">
+      <Filter>thirdparty\minhook\hde</Filter>
     </ClInclude>
     <ClInclude Include="thirdparty\minhook\src\buffer.h">
       <Filter>thirdparty\minhook</Filter>
@@ -102,61 +115,49 @@
     <ClInclude Include="thirdparty\minhook\src\trampoline.h">
       <Filter>thirdparty\minhook</Filter>
     </ClInclude>
-    <ClInclude Include="thirdparty\minhook\src\hde\hde32.h">
-      <Filter>thirdparty\minhook\hde</Filter>
-    </ClInclude>
-    <ClInclude Include="thirdparty\minhook\src\hde\hde64.h">
-      <Filter>thirdparty\minhook\hde</Filter>
-    </ClInclude>
-    <ClInclude Include="thirdparty\minhook\src\hde\pstdint.h">
-      <Filter>thirdparty\minhook\hde</Filter>
-    </ClInclude>
-    <ClInclude Include="thirdparty\minhook\src\hde\table32.h">
-      <Filter>thirdparty\minhook\hde</Filter>
-    </ClInclude>
-    <ClInclude Include="thirdparty\minhook\src\hde\table64.h">
-      <Filter>thirdparty\minhook\hde</Filter>
-    </ClInclude>
-    <ClInclude Include="ironsight\sdk.h">
-      <Filter>ironsight</Filter>
-    </ClInclude>
-    <ClInclude Include="ironsight\weapon_mgr.h">
-      <Filter>ironsight</Filter>
-    </ClInclude>
-    <ClInclude Include="ironsight\player.h">
-      <Filter>ironsight</Filter>
-    </ClInclude>
-    <ClInclude Include="ironsight\entity_node.h">
-      <Filter>ironsight</Filter>
-    </ClInclude>
-    <ClInclude Include="ironsight\entity_list.h">
-      <Filter>ironsight</Filter>
-    </ClInclude>
-    <ClInclude Include="ironsight\entity_mgr.h">
-      <Filter>ironsight</Filter>
+    <ClInclude Include="config\config.h">
+      <Filter>config</Filter>
     </ClInclude>
     <ClInclude Include="hooks\hooks.h">
       <Filter>hooks</Filter>
     </ClInclude>
-    <ClInclude Include="hacks\esp.h">
-      <Filter>hacks</Filter>
-    </ClInclude>
-    <ClInclude Include="ironsight\world_to_screen.h">
-      <Filter>ironsight</Filter>
-    </ClInclude>
-    <ClInclude Include="math.h">
-      <Filter>ironsight</Filter>
-    </ClInclude>
-    <ClInclude Include="hacks\aimbot.h">
-      <Filter>hacks</Filter>
-    <ClInclude Include="render\render.h">
-      <Filter>render</Filter>
-    </ClInclude>
     <ClInclude Include="menu\menu.h">
       <Filter>menu</Filter>
     </ClInclude>
-    <ClInclude Include="config\config.h">
-      <Filter>config</Filter>
+    <ClInclude Include="render\render.h">
+      <Filter>render</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="hacks">
+      <UniqueIdentifier>{3c2e84fb-aa70-4311-9084-f4341c07fe2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ironsight">
+      <UniqueIdentifier>{d4922a46-b2ce-40f7-8fb9-453ae58511f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thirdparty">
+      <UniqueIdentifier>{62bb39ae-2969-47dc-ba19-6c14e19c6a46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thirdparty\imgui">
+      <UniqueIdentifier>{78cedea0-581d-47b4-857b-b049da2253f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thirdparty\minhook">
+      <UniqueIdentifier>{79dea730-7830-4341-a721-f3798f801895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thirdparty\minhook\hde">
+      <UniqueIdentifier>{712676a8-17d9-4838-980f-e44991ca5fd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{0de53939-7b59-454b-b661-8d3ed355bda1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="hooks">
+      <UniqueIdentifier>{6780c1fd-df25-4d94-9a31-3966876b04da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="menu">
+      <UniqueIdentifier>{05fb784a-f7fa-4b9c-9342-5c6e7852c177}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="render">
+      <UniqueIdentifier>{92eab429-f0b5-4384-9a78-5d2e70e16ef4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

@@ -46,7 +46,6 @@ bool __stdcall DllMain( HINSTANCE, DWORD reason, LPVOID )
 {
 	if ( reason == DLL_PROCESS_ATTACH )
 	{
-		MessageBoxA( nullptr, "Hack injected", "Hack injected", MB_OK | MB_SERVICE_NOTIFICATION );
 		auto hthread = CreateThread( nullptr, 0, thread, nullptr, 0, nullptr );
 
 		if ( hthread )

@@ -17,9 +17,6 @@ WNDPROC o_wndproc = nullptr;
 HWND g_hwnd = nullptr;
 bool b_render_menu = false;
 
-// temp
-bool b_aimbot   = false;
-
 LRESULT wnd_proc( const HWND hwnd, const UINT u_msg, const WPARAM w_param, const LPARAM l_param )
 {
 	extern LRESULT ImGui_ImplWin32_WndProcHandler( HWND, UINT, WPARAM, LPARAM );
@@ -102,7 +99,7 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 		render::end();
 	}
 
-	if ( b_aimbot )
+	if ( config::b_aimbot )
 		aimbot::aimbot();
 
 	ImGui::EndFrame();

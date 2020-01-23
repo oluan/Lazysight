@@ -1,3 +1,5 @@
+#pragma once
+
 class CActor
 {
 public:
@@ -82,5 +84,5 @@ public:
 	uint8_t random_14; //0x08C8
 	uint8_t m_teamid; //0x08C9
 
-	inline bool is_alive() const { return this->m_health > 0.0f; }
+	inline bool is_alive() { return this->m_health > 0.0f; };
 }; //Size: 0x08CA

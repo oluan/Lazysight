@@ -107,7 +107,7 @@ namespace menu
 
 					break;
 				case 1:
-					ImGui::Text( "soonTM" );
+					add_item( "Aimbot", &config::b_aimbot );
 					break;
 				case 2:
 					ImGui::Text( "Misc" );
