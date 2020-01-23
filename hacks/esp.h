@@ -7,14 +7,10 @@ namespace esp
 {
 	static void line_esp( CActor* pentity , bool is_enemy ) noexcept
 	{
-		printf("lineesp\n");
-
 		D3DXVECTOR2 screen{};
 
 		if ( !sdk::world_to_screen( pentity->m_coordinates , screen ) )
 			return;
-
-		printf("w2s\n");
 
 		render::draw_line( { ImGui::GetIO().DisplaySize.x / 2 , ImGui::GetIO().DisplaySize.y }, screen , is_enemy ? config::enemy_line : config::ally_line );
 	}
