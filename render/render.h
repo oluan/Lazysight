@@ -31,7 +31,7 @@ namespace render
 		ImGui::PopStyleVar( 2 );
 	}
 
-	static void draw_line( D3DXVECTOR2 from , D3DXVECTOR2 to , float* col , const bool outlined = true , const float thickness = 1.0f ) noexcept
+	static void draw_line( D3DXVECTOR2 from , D3DXVECTOR2 to , float* col , const bool outlined = true , const float thickness = 0.4f ) noexcept
 	{
 		if ( outlined )
 		{
@@ -95,7 +95,7 @@ namespace render
 
 	}
 
-	static void draw_box( float x , float y, float w, float h, float* col , bool outlined = true )
+	static void draw_box( float x , float y, float w, float h, float* col , bool outlined = true , float thickness = 0.4f )
 	{
 		if ( outlined )
 		{
@@ -105,25 +105,25 @@ namespace render
 			x += 1;
 			y += 1;
 
-			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) );
+			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) , 0.0f , 15 , thickness );
 
 			x -= 2;
 
-			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) );
+			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) , 0.0f , 15 , thickness );
 
 			x += 2;
 			y -= 2;
 
-			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) );
+			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) , 0.0f , 15 , thickness );
 
 			x -= 2;
 
-			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) );
+			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) , 0.0f , 15 , thickness );
 
 			x = b_x;
 			y = b_y;
 
 		}
-		ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( col ) );
+		ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( col ) , 0.0f , 15 , thickness ) ;
 	}
 }
