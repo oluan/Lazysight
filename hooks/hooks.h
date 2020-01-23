@@ -83,10 +83,11 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 						auto pentity = pentity_node->m_instance;
 
 						const auto b_isenemy = pentity->m_teamid != plocal_actor->m_teamid;
-						if ( pentity != plocal_actor && static_cast<bool>( pentity->m_health ) )
+						if ( pentity != plocal_actor && pentity->is_alive() )
 						{
 							esp::line_esp( pentity , b_isenemy );
 							esp::box2d( pentity , b_isenemy );
+
 						}
 
 						pentity_node = pentity_node->m_next;

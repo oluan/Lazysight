@@ -10,6 +10,7 @@ public:
 	D3DXVECTOR2 m_velocity; //0x0034
 	char pad_003C[8]; //0x003C
 	float m_health; //0x0044
+	inline bool is_alive() const { return this->m_health > 0.0f; }
 	char pad_0048[12]; //0x0048
 	D3DXVECTOR3 m_coordinates2; //0x0054
 	char pad_0060[72]; //0x0060
