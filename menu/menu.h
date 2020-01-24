@@ -122,6 +122,10 @@ namespace menu
 					break;
 				case 2:
 					ImGui::Text( "Misc" );
+					add_item("No recoil", &config::b_recoil, false);
+					add_item("No spread", &config::b_spread ,false);
+					add_item("Speed", &config::b_speed, false);
+					ImGui::SliderInt("*", &config::i_speed, 1, 10);
 					ImGui::PushStyleColor( ImGuiCol_Button, { 1.f , 0.f , 0.f , 1.f } );
 					if ( ImGui::Button( "Unload" ) )
 					{

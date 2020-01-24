@@ -16,4 +16,8 @@ namespace config
 	extern bool b_aimbot;
 
 	extern bool visuals_toggle;
+	extern bool b_recoil;
+	extern bool b_spread;
+	extern bool b_speed;
+	extern int i_speed;
 }

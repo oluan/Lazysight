@@ -133,6 +133,12 @@
     <ClInclude Include="thirdparty\helpers\helpers.hpp">
       <Filter>thirdparty\helpers</Filter>
     </ClInclude>
+    <ClInclude Include="ironsight\weapon_info.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\misc.h">
+      <Filter>hacks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="hacks">

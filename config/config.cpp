@@ -18,4 +18,8 @@ namespace config
 	bool b_aimbot;
 
 	bool visuals_toggle;
+	bool b_recoil;
+	bool b_spread;
+	bool b_speed;
+	int i_speed = 1.0f;
 }

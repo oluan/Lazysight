@@ -163,12 +163,14 @@
     <ClInclude Include="hacks\aimbot.h" />
     <ClInclude Include="config\config.h" />
     <ClInclude Include="hacks\esp.h" />
+    <ClInclude Include="hacks\misc.h" />
     <ClInclude Include="hooks\hooks.h" />
     <ClInclude Include="ironsight\entity_list.h" />
     <ClInclude Include="ironsight\entity_mgr.h" />
     <ClInclude Include="ironsight\entity_node.h" />
     <ClInclude Include="ironsight\player.h" />
     <ClInclude Include="ironsight\sdk.h" />
+    <ClInclude Include="ironsight\weapon_info.h" />
     <ClInclude Include="ironsight\world_to_screen.h" />
     <ClInclude Include="ironsight\weapon_mgr.h" />
     <ClInclude Include="math.h" />
