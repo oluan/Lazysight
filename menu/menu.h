@@ -32,7 +32,7 @@ namespace menu
 		style->Colors[ImGuiCol_TextDisabled] = ImVec4(0.24f, 0.23f, 0.29f, 1.00f);
 		style->Colors[ImGuiCol_WindowBg] = ImVec4(0.06f, 0.05f, 0.07f, 0.95f);
 		style->Colors[ImGuiCol_PopupBg] = ImVec4(0.07f, 0.07f, 0.09f, 1.00f);
-		style->Colors[ImGuiCol_Border] = ImVec4(0.80f, 0.80f, 0.83f, 0.88f);
+		style->Colors[ImGuiCol_Border] = ImVec4(0.24f, 0.23f, 0.29f, 1.00f);
 		style->Colors[ImGuiCol_BorderShadow] = ImVec4(0.92f, 0.91f, 0.88f, 0.00f);
 		style->Colors[ImGuiCol_FrameBg] = ImVec4(0.10f, 0.09f, 0.12f, 1.00f);
 		style->Colors[ImGuiCol_FrameBgHovered] = ImVec4(0.24f, 0.23f, 0.29f, 1.00f);
@@ -88,6 +88,9 @@ namespace menu
 			if ( ImGui::Begin( "Lazysight" , nullptr , ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse |  ImGuiWindowFlags_NoResize ) )
 			{
 				static auto tab = 0;
+				const auto style = &ImGui::GetStyle();
+				style->FramePadding = ImVec2(5, 8);
+
 				ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(4, 2));
 				if ( ImGui::Button( "Visuals", { 125 , 0 } ) ) tab = 0;
 				ImGui::SameLine();
@@ -96,15 +99,15 @@ namespace menu
 				if ( ImGui::Button( "Misc", { 125 , 0 } ) ) tab = 2;
 				ImGui::PopStyleVar();
 
+				style->FramePadding = ImVec2(5, 2);
 
-
-				ImGui::PushStyleVar( ImGuiStyleVar_FramePadding  , ImVec2( 5 , 2 ) );
 				ImGui::Text( " " ); // advanced spacing system
 				switch( tab )
 				{
 				case 0:
 
-					add_item("Activate", &config::visuals_toggle, true);
+					add_item( "Activate", &config::visuals_toggle, true );
+
 					ImGui::Text(" ");
 
 					ImGui::BeginChild(1, ImVec2( 390 , 120 ) , true);
@@ -118,14 +121,24 @@ namespace menu
 
 					break;
 				case 1:
-					add_item( "Aimbot", &config::b_aimbot );
+					add_item( "Aimbot", &config::b_aimbot , true );
 					break;
 				case 2:
-					ImGui::Text( "Misc" );
-					add_item("No recoil", &config::b_recoil, false);
-					add_item("No spread", &config::b_spread ,false);
-					add_item("Speed", &config::b_speed, false);
-					ImGui::SliderInt("*", &config::i_speed, 1, 10);
+					ImGui::Text( "Aim Correction" );
+					ImGui::BeginChild( 2 , ImVec2(390 , 50) , true );
+					style->ItemSpacing = ImVec2(12, 3);
+					add_item( "No Recoil", &config::b_recoil  );
+					add_item( "No Spread", &config::b_spread  );
+					style->ItemSpacing = ImVec2(12, 0);
+					ImGui::EndChild();
+
+					ImGui::Text( "Player" );
+					ImGui::BeginChild( 3 , ImVec2(390, 50) , true );
+					add_item( "Speed Hack", &config::b_speed );
+					ImGui::SliderInt("##SpeedSlider", &config::i_speed, 1, 10);
+					ImGui::EndChild();
+
+					ImGui::Text( " " );
 					ImGui::PushStyleColor( ImGuiCol_Button, { 1.f , 0.f , 0.f , 1.f } );
 					if ( ImGui::Button( "Unload" ) )
 					{
@@ -137,8 +150,9 @@ namespace menu
 					break;
 				default: break;
 				}
-				ImGui::PopStyleVar();
 				ImGui::End();
+
+				ImGui::ShowStyleEditor();
 			}
 		}
 	}
