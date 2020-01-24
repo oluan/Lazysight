@@ -61,6 +61,9 @@
     <ClInclude Include="math.h">
       <Filter>ironsight</Filter>
     </ClInclude>
+    <ClInclude Include="ironsight\actor.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
     <ClInclude Include="ironsight\weapon_mgr.h">
       <Filter>ironsight</Filter>
     </ClInclude>
@@ -129,6 +132,12 @@
     </ClInclude>
     <ClInclude Include="thirdparty\helpers\helpers.hpp">
       <Filter>thirdparty\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\weapon_info.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
+    <ClInclude Include="hacks\misc.h">
+      <Filter>hacks</Filter>
     </ClInclude>
     <ClInclude Include="ironsight\actor.h">
       <Filter>ironsight</Filter>

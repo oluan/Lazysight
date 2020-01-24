@@ -47,6 +47,6 @@ public:
 	uint8_t m_teamid; //0x08C9
 	char pad_08CA[58]; //0x08CA
 	float m_max_health; //0x0904
+	inline bool is_alive() { return this->m_health > 0.0f; };
+}; //Size: 0x08CA
 
-	inline bool is_alive() const { return this->m_health > 0.0f; }
-}; //Size: 0x0908

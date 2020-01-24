@@ -11,6 +11,7 @@
 #include "../ironsight/sdk.h"
 #include "../hacks/esp.h"
 #include "../hacks/aimbot.h"
+#include "../hacks/misc.h"
 #include "../menu/menu.h"
 
 WNDPROC o_wndproc = nullptr;
@@ -107,6 +108,8 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 	if ( config::b_aimbot )
 		aimbot::aimbot();
 
+	misc::misc_context();
+	
 	ImGui::EndFrame();
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData( ImGui::GetDrawData() );
