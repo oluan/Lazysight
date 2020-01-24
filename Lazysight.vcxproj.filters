@@ -61,7 +61,7 @@
     <ClInclude Include="math.h">
       <Filter>ironsight</Filter>
     </ClInclude>
-    <ClInclude Include="ironsight\player.h">
+    <ClInclude Include="ironsight\actor.h">
       <Filter>ironsight</Filter>
     </ClInclude>
     <ClInclude Include="ironsight\weapon_mgr.h">
