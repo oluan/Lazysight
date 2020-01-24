@@ -139,6 +139,9 @@
     <ClInclude Include="hacks\misc.h">
       <Filter>hacks</Filter>
     </ClInclude>
+    <ClInclude Include="ironsight\actor.h">
+      <Filter>ironsight</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="hacks">

@@ -37,8 +37,8 @@ public:
 	char pad_0374[72]; //0x0374
 	float m_camera_view; //0x03BC
 	char pad_03C0[60]; //0x03C0
-	CWeaponManager* m_pweaponmgr; //0x03FC
-	CWeaponInfo* m_pweaponinfo; //0x0400
+	class CWeaponManager* m_pweaponmgr; //0x03FC
+	class CWeaponInfo* m_pweaponinfo; //0x0400
 	char pad_0404[1060]; //0x0404
 	wchar_t m_name[16]; //0x0828
 	wchar_t m_clan_name[16]; //0x0848
@@ -49,3 +49,4 @@ public:
 	float m_max_health; //0x0904
 	inline bool is_alive() { return this->m_health > 0.0f; };
 }; //Size: 0x08CA
+
