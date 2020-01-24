@@ -167,7 +167,7 @@
     <ClInclude Include="ironsight\entity_list.h" />
     <ClInclude Include="ironsight\entity_mgr.h" />
     <ClInclude Include="ironsight\entity_node.h" />
-    <ClInclude Include="ironsight\player.h" />
+    <ClInclude Include="ironsight\actor.h" />
     <ClInclude Include="ironsight\sdk.h" />
     <ClInclude Include="ironsight\world_to_screen.h" />
     <ClInclude Include="ironsight\weapon_mgr.h" />

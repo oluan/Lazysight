@@ -61,9 +61,6 @@
     <ClInclude Include="math.h">
       <Filter>ironsight</Filter>
     </ClInclude>
-    <ClInclude Include="ironsight\player.h">
-      <Filter>ironsight</Filter>
-    </ClInclude>
     <ClInclude Include="ironsight\weapon_mgr.h">
       <Filter>ironsight</Filter>
     </ClInclude>
@@ -132,6 +129,9 @@
     </ClInclude>
     <ClInclude Include="thirdparty\helpers\helpers.hpp">
       <Filter>thirdparty\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ironsight\actor.h">
+      <Filter>ironsight</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
