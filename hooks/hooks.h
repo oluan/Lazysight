@@ -25,7 +25,7 @@ LRESULT wnd_proc( const HWND hwnd, const UINT u_msg, const WPARAM w_param, const
 	if ( u_msg == WM_KEYUP && w_param == VK_INSERT )
 		b_render_menu = !b_render_menu;
 
-	if ( ImGui_ImplWin32_WndProcHandler( hwnd, u_msg, w_param, l_param ) )
+	if ( b_render_menu && ImGui_ImplWin32_WndProcHandler( hwnd, u_msg, w_param, l_param ) )
 		return 1l;
 
 	return CallWindowProc( o_wndproc, hwnd, u_msg, w_param, l_param );

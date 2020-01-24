@@ -85,6 +85,8 @@ namespace menu
 		if ( b_render_menu )
 		{
 			ImGui::SetNextWindowSize( ImVec2( 415.f, 240.f ) );
+			ImGui::GetIO().MouseDrawCursor = true;
+
 			if ( ImGui::Begin( "Lazysight" , nullptr , ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse |  ImGuiWindowFlags_NoResize ) )
 			{
 				static auto tab = 0;
@@ -155,5 +157,7 @@ namespace menu
 				ImGui::ShowStyleEditor();
 			}
 		}
+
+		else ImGui::GetIO().MouseDrawCursor = false;
 	}
 }
