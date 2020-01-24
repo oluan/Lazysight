@@ -95,6 +95,6 @@ namespace aimbot
 			plocal_actor->m_view_angles.y = 180.0f - ( ( atanf( abs( distance_x / distance_z ) ) / PI ) * 180.0f );
 		}
 
-		plocal_actor->m_view_angles.x = ( -asinf( distance_y / distance ) / PI ) * 180.0f;
+		plocal_actor->m_view_angles.x = ( ( -asinf( distance_y / distance ) / PI ) * 180.0f ) - 0.2f;
 	}
 }
