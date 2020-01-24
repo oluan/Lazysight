@@ -153,8 +153,6 @@ namespace menu
 				default: break;
 				}
 				ImGui::End();
-
-				ImGui::ShowStyleEditor();
 			}
 		}
 
