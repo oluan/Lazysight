@@ -104,10 +104,10 @@ namespace menu
 				{
 				case 0:
 
-					add_item("Activate", &config::visuals_toggle, true);
+					add_item( "Activate" , &config::visuals_toggle , true );
 					ImGui::Text(" ");
 
-					ImGui::BeginChild(1, ImVec2( 390 , 120 ) , true);
+					ImGui::BeginChild( 1 , ImVec2( 390 , 120 ) , true );
 					add_item_with_color( "ESP Line Enemy" , &config::b_enemy_line , config::enemy_line );
 					add_item_with_color( "ESP Line Team", &config::b_ally_line, config::ally_line );
 					add_item_with_color( "ESP Box 2D Enemy" , &config::b_enemy_box , config::enemy_box );
@@ -118,15 +118,16 @@ namespace menu
 
 					break;
 				case 1:
-					add_item( "Aimbot", &config::b_aimbot );
+					add_item( "Aimbot" , &config::b_aimbot );
 					break;
 				case 2:
 					ImGui::Text( "Misc" );
-					add_item("No recoil", &config::b_recoil, false);
-					add_item("No spread", &config::b_spread ,false);
-					add_item("Speed", &config::b_speed, false);
-					ImGui::SliderInt("*", &config::i_speed, 1, 10);
-					ImGui::PushStyleColor( ImGuiCol_Button, { 1.f , 0.f , 0.f , 1.f } );
+					add_item( "No recoil" , &config::b_recoil , false );
+					add_item( "No spread" , &config::b_spread  ,false );
+					add_item( "Stamina" , &config::b_stamina );
+					add_item( "Speed", &config::b_speed , false );
+					ImGui::SliderInt( "*" , &config::i_speed , 1 , 10 );
+					ImGui::PushStyleColor( ImGuiCol_Button , { 1.f , 0.f , 0.f , 1.f } );
 					if ( ImGui::Button( "Unload" ) )
 					{
 						MH_DisableHook( MH_ALL_HOOKS );

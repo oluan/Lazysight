@@ -19,7 +19,6 @@ namespace misc
 			plocal_actor->m_pweaponinfo->m_spread = 0.0f;
 		}
 	}
-
 	static void misc_context()
 	{
 		if ( config::b_recoil )
@@ -30,6 +29,15 @@ namespace misc
 		if ( config::b_spread )
 		{
 			weapon_spread();
+		}
+		if( config::b_stamina )
+		{
+			const auto plocal_actor = *reinterpret_cast<CActor**>(ironsight_base + 0xA88B34);
+			if (plocal_actor)
+			{
+				plocal_actor->m_max_stamina = 999999;
+				plocal_actor->m_stamina = 999999;
+			}
 		}
 		if( config::b_speed )
 		{
