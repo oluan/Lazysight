@@ -126,4 +126,9 @@ namespace render
 		}
 		ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( col ) , 0.0f , 15 , thickness ) ;
 	}
+
+	static void circle( const ImVec2 position , const float radius , float* color , const float thickness = 0.4f )
+	{
+		ImGui::GetCurrentWindow()->DrawList->AddCircle( ImVec2( position.x , position.y ) , radius , ImGui::GetColorU32( color ) , 128 , thickness );
+	}
 }

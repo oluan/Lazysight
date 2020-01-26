@@ -26,4 +26,8 @@ public:
 					  ( ( this->y - vec.y ) * ( this->y - vec.y ) ) + 
 					  ( ( this->z - vec.z ) * ( this->z - vec.z ) ) );
 	}
+	bool get_player_fov( float radius , const Vector3 my_angle , const Vector3 target_angle )
+	{
+		
+	}
 };

@@ -112,7 +112,7 @@ namespace menu
 
 					ImGui::Text(" ");
 
-					ImGui::BeginChild(1, ImVec2( 390 , 120 ) , true);
+					ImGui::BeginChild( 1 , ImVec2( 390 , 120 ) , true);
 					add_item_with_color( "ESP Line Enemy" , &config::b_enemy_line , config::enemy_line );
 					add_item_with_color( "ESP Line Team", &config::b_ally_line, config::ally_line );
 					add_item_with_color( "ESP Box 2D Enemy" , &config::b_enemy_box , config::enemy_box );
@@ -124,20 +124,29 @@ namespace menu
 					break;
 				case 1:
 					add_item( "Aimbot", &config::b_aimbot , true );
+
+					ImGui::Text(" ");
+					
+					ImGui::BeginChild( 2 , ImVec2( 390 , 50 ) , true);
+					add_item( "Fov", &config::b_view_fov );
+					ImGui::SliderInt( "value", &config::i_fov , 1 , 360 );
+					ImGui::SameLine();
+					ImGui::ColorEdit4( "fov_color" , config::view_fov , ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel );
+					ImGui::EndChild();
 					break;
 				case 2:
 					ImGui::Text( "Aim Correction" );
-					ImGui::BeginChild( 2 , ImVec2(390 , 50) , true );
-					style->ItemSpacing = ImVec2(12, 3);
+					ImGui::BeginChild( 3 , ImVec2( 390 , 50 ) , true );
+					style->ItemSpacing = ImVec2(12, 3 );
 					add_item( "No Recoil", &config::b_recoil  );
 					add_item( "No Spread", &config::b_spread  );
-					style->ItemSpacing = ImVec2(12, 0);
+					style->ItemSpacing = ImVec2(12, 0 );
 					ImGui::EndChild();
 
 					ImGui::Text( "Player" );
-					ImGui::BeginChild( 3 , ImVec2(390, 50) , true );
+					ImGui::BeginChild( 4 , ImVec2( 390, 50 ) , true );
 					add_item( "Speed Hack", &config::b_speed );
-					ImGui::SliderInt("##SpeedSlider", &config::i_speed, 1, 10);
+					ImGui::SliderInt( "##SpeedSlider", &config::i_speed , 1 , 10 );
 					ImGui::EndChild();
 
 					ImGui::Text( " " );

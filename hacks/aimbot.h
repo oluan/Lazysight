@@ -33,6 +33,8 @@ namespace aimbot
 							if ( pentity != plocal_actor && pentity->m_vtable_ptr == plocal_actor->m_vtable_ptr &&
 								pentity->is_alive() && pentity->m_teamid != plocal_actor->m_teamid )
 							{
+
+								
 								auto distance = plocal_actor->m_head_coords.get_3d_distance( pentity->m_head_coords );
 
 								if ( distance < lowest_distance )
@@ -96,5 +98,10 @@ namespace aimbot
 		}
 
 		plocal_actor->m_view_angles.x = ( ( -asinf( distance_y / distance ) / PI ) * 180.0f ) - 0.2f;
+	}
+
+	static void fov( const ImVec2 position , const int radius , float* color )
+	{
+		render::circle( position , static_cast<float>(radius) , color );
 	}
 }

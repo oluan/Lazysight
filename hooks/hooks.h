@@ -101,12 +101,16 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 				}
 			}
 		}
-
+		
+		if (config::b_view_fov)
+			aimbot::fov(ImVec2(g_view_port.Width / 2.0f, g_view_port.Height / 2.0f), config::i_fov * 6.2832, config::view_fov);
+		
 		render::end();
 	}
 
 	if ( config::b_aimbot )
 		aimbot::aimbot();
+	
 
 	misc::misc_context();
 	
