@@ -3,6 +3,10 @@
 
 namespace aimbot
 {
+	static bool get_player_fov( float radius, const Vector3 my_angle, const Vector3 target_angle )
+	{
+		
+	}
 	static CActor* get_nearest_entity( const CActor* plocal_actor ) noexcept
 	{
 		if ( !plocal_actor )
