@@ -127,9 +127,12 @@ namespace menu
 
 					ImGui::Text(" ");
 					
-					ImGui::BeginChild( 2 , ImVec2( 390 , 50 ) , true);
+					ImGui::BeginChild( 2 , ImVec2( 390 , 100 ) , true);
+					add_item("Trigger", &config::b_trigger);
+					add_item( "Smooth" , &config::b_smooth );
+					ImGui::SliderInt( "value" , &config::i_smooth , 1 , 15 );
 					add_item( "Fov", &config::b_view_fov );
-					ImGui::SliderInt( "value", &config::i_fov , 1 , 360 );
+					ImGui::SliderInt( "value ", &config::i_fov , 1 , 360 );
 					ImGui::SameLine();
 					ImGui::ColorEdit4( "fov_color" , config::view_fov , ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel );
 					ImGui::EndChild();

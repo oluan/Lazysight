@@ -18,7 +18,10 @@ namespace config
 	bool b_ally_name;
 	bool b_aimbot;
 	bool b_view_fov;
-	int i_fov = 1;
+	int i_fov = 30;
+	bool b_trigger;
+	bool b_smooth;
+	int i_smooth;
 
 	bool visuals_toggle;
 	bool b_recoil;

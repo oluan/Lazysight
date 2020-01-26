@@ -17,7 +17,10 @@ namespace config
 	extern bool b_aimbot;
 	extern bool b_view_fov;
 	extern int i_fov;
-
+	extern bool b_trigger;
+	extern bool b_smooth;
+	extern int i_smooth;
+	
 	extern bool visuals_toggle;
 	extern bool b_recoil;
 	extern bool b_spread;
