@@ -111,11 +111,11 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 		if ( config::b_trigger )
 		{
 			const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
-			const auto ptrigger     = reinterpret_cast< uintptr_t* >( ironsight_base + 0xA906CD );
+			const auto ptrigger     = reinterpret_cast< BYTE* >( ironsight_base + 0xA906CD );
 
 			if ( plocal_actor )
 			{
-				if ( *reinterpret_cast< BYTE* >( ptrigger ) )
+				if ( *ptrigger )
 					plocal_actor->m_attacking = true;
 			}
 		}
