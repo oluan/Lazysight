@@ -14,9 +14,9 @@ namespace aimbot
 		// g_entity_manager 8B 0D ? ? ? ? 85 C9 74 15 83 C8 FF F0 0F C1 41 ? 48 75 0A 85 C9 74 06 8B 01 6A 01 FF 10 E8 ? ? ? ? 
 		auto pentity_mgr = *reinterpret_cast< CEntityManager** >( ironsight_base + 0xA88B30 );
 
-		__try
+		if ( pentity_mgr )
 		{
-			if ( pentity_mgr )
+			__try
 			{
 				const auto pentity_list = pentity_mgr->m_list;
 
@@ -31,7 +31,7 @@ namespace aimbot
 							auto pentity = pentity_node->m_instance;
 
 							if ( pentity != plocal_actor && pentity->m_vtable_ptr == plocal_actor->m_vtable_ptr &&
-								 pentity->is_alive() && pentity->m_teamid != plocal_actor->m_teamid )
+								pentity->is_alive() && pentity->m_teamid != plocal_actor->m_teamid )
 							{
 								auto distance = plocal_actor->m_head_coords.get_3d_distance( pentity->m_head_coords );
 
@@ -47,11 +47,11 @@ namespace aimbot
 					}
 				}
 			}
-		}
 
-		__except ( EXCEPTION_EXECUTE_HANDLER )
-		{
-			return nullptr;
+			__except ( EXCEPTION_EXECUTE_HANDLER )
+			{
+				return nullptr;
+			}
 		}
 
 		return pnearest_entity;
