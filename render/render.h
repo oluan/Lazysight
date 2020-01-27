@@ -12,14 +12,14 @@ namespace render
 {
 	static void start() noexcept
 	{
-		ImGui::PushStyleVar( ImGuiStyleVar_WindowBorderSize, 0.0f );
-		ImGui::PushStyleVar( ImGuiStyleVar_WindowPadding, { 0.0f, 0.0f } );
-		ImGui::PushStyleColor( ImGuiCol_WindowBg, { 0.0f, 0.0f, 0.0f, 0.0f } );
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 0.0f, 0.0f });
+		ImGui::PushStyleColor(ImGuiCol_WindowBg, { 0.0f, 0.0f, 0.0f, 0.0f });
 
-		ImGui::SetNextWindowPos( ImVec2(0, 0), ImGuiCond_Always );
-		ImGui::SetNextWindowSize( ImVec2( ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y ), ImGuiCond_Always );
+		ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
+		ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y), ImGuiCond_Always);
 
-		ImGui::Begin( "##Canvas", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoInputs );
+		ImGui::Begin("##Canvas", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBringToFrontOnFocus );
 
 	}
 
@@ -125,5 +125,10 @@ namespace render
 
 		}
 		ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( col ) , 0.0f , 15 , thickness ) ;
+	}
+
+	static void circle( const ImVec2 position , const float radius , float* color , const float thickness = 0.4f )
+	{
+		ImGui::GetCurrentWindow()->DrawList->AddCircle( ImVec2( position.x , position.y ) , radius , ImGui::GetColorU32( color ) , 128 , thickness );
 	}
 }

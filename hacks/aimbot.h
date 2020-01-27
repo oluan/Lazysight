@@ -4,7 +4,7 @@
 namespace aimbot
 {
 	static CActor* get_nearest_entity( const CActor* plocal_actor ) noexcept
-	{
+	{	
 		if ( !plocal_actor )
 			return nullptr;
 
@@ -33,6 +33,8 @@ namespace aimbot
 							if ( pentity != plocal_actor && pentity->m_vtable_ptr == plocal_actor->m_vtable_ptr &&
 								pentity->is_alive() && pentity->m_teamid != plocal_actor->m_teamid )
 							{
+
+								
 								auto distance = plocal_actor->m_head_coords.get_3d_distance( pentity->m_head_coords );
 
 								if ( distance < lowest_distance )
@@ -59,42 +61,63 @@ namespace aimbot
 
 	static void aimbot() noexcept
 	{
+		ImGuiIO& io = ImGui::GetIO();
 		//g_local_actor -> g_entity_manager + 0x4
-		const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
-		const auto ptarget      = get_nearest_entity( plocal_actor );
-
-		if ( !ptarget )
-			return;
-
-		const auto distance_x = plocal_actor->m_head_coords.get_distance_x( ptarget->m_head_coords );
-		const auto distance_y = plocal_actor->m_head_coords.get_distance_y( ptarget->m_head_coords );
-		const auto distance_z = plocal_actor->m_head_coords.get_distance_z( ptarget->m_head_coords );
-		const auto distance   = plocal_actor->m_head_coords.get_3d_distance( ptarget->m_head_coords );
-
-		if ( ptarget->m_head_coords.x < plocal_actor->m_head_coords.x &&
-			 ptarget->m_head_coords.z > plocal_actor->m_head_coords.z )
+		if(io.MouseDownDuration[0] > 0.0f)
 		{
-			plocal_actor->m_view_angles.y = ( atanf( abs( distance_x / distance_z ) ) / PI ) * 180.0f;
-		}
 
-		else if ( ptarget->m_head_coords.x > plocal_actor->m_head_coords.x &&
-			      ptarget->m_head_coords.z > plocal_actor->m_head_coords.z )
-		{
-			plocal_actor->m_view_angles.y = ( ( atanf( abs( distance_x / distance_z ) ) / PI ) * 180.0f ) * -1.0f;
-		}
+			const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
+			const auto ptarget      = get_nearest_entity( plocal_actor );
 
-		else if ( ptarget->m_head_coords.x > plocal_actor->m_head_coords.x &&
-			      ptarget->m_head_coords.z < plocal_actor->m_head_coords.z )
-		{
-			plocal_actor->m_view_angles.y = ( ( atanf( abs( distance_x / distance_z ) ) / PI ) * 180.0f ) + 180.0f;
-		}
+			if ( !ptarget )
+				return;
 
-		else if ( ptarget->m_head_coords.x < plocal_actor->m_head_coords.x &&
-			      ptarget->m_head_coords.z < plocal_actor->m_head_coords.z )
-		{
-			plocal_actor->m_view_angles.y = 180.0f - ( ( atanf( abs( distance_x / distance_z ) ) / PI ) * 180.0f );
-		}
+			const auto distance_x = plocal_actor->m_head_coords.get_distance_x( ptarget->m_head_coords );
+			const auto distance_y = plocal_actor->m_head_coords.get_distance_y( ptarget->m_head_coords );
+			const auto distance_z = plocal_actor->m_head_coords.get_distance_z( ptarget->m_head_coords );
+			const auto distance   = plocal_actor->m_head_coords.get_3d_distance( ptarget->m_head_coords );
+			auto y = 0.0f;
+			
+			if ( ptarget->m_head_coords.x < plocal_actor->m_head_coords.x &&
+				ptarget->m_head_coords.z > plocal_actor->m_head_coords.z )
+			{
+				y = ( atanf( abs( distance_x / distance_z ) ) / PI ) * 180.0f;
+			}
 
-		plocal_actor->m_view_angles.x = ( ( -asinf( distance_y / distance ) / PI ) * 180.0f ) - 0.2f;
+			else if ( ptarget->m_head_coords.x > plocal_actor->m_head_coords.x &&
+			    ptarget->m_head_coords.z > plocal_actor->m_head_coords.z )
+			{
+				y = ( ( atanf( abs( distance_x / distance_z ) ) / PI ) * 180.0f ) * -1.0f;
+			}
+
+			else if ( ptarget->m_head_coords.x > plocal_actor->m_head_coords.x &&
+			    ptarget->m_head_coords.z < plocal_actor->m_head_coords.z )
+			{
+				y = ( ( atanf( abs( distance_x / distance_z ) ) / PI ) * 180.0f ) + 180.0f;
+			}
+
+			else if ( ptarget->m_head_coords.x < plocal_actor->m_head_coords.x &&
+			    ptarget->m_head_coords.z < plocal_actor->m_head_coords.z )
+			{
+				y = 180.0f - ( ( atanf( abs( distance_x / distance_z ) ) / PI ) * 180.0f );
+			}
+			const auto x = ((-asinf(distance_y / distance) / PI) * 180.0f) - 0.2f;
+
+			if( config::b_smooth )
+			{
+				plocal_actor->m_view_angles.x += (x - plocal_actor->m_view_angles.x) / static_cast<float>(config::i_smooth);
+				plocal_actor->m_view_angles.y += (y - plocal_actor->m_view_angles.y) / static_cast<float>(config::i_smooth);
+			}
+			else
+			{
+				plocal_actor->m_view_angles.x = x;
+				plocal_actor->m_view_angles.y = y;
+			}
+		}
+	}
+
+	static void fov( const ImVec2 position , const int radius , float* color )
+	{
+		render::circle( position , static_cast<float>(radius) , color );
 	}
 }

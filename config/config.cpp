@@ -8,6 +8,7 @@ namespace config
 	float enemy_box[3];
 	float ally_name[3];
 	float enemy_name[3];
+	float view_fov[3];
 
 	bool b_enemy_line;
 	bool b_ally_line;
@@ -16,6 +17,11 @@ namespace config
 	bool b_enemy_name;
 	bool b_ally_name;
 	bool b_aimbot;
+	bool b_view_fov;
+	int i_fov = 30;
+	bool b_trigger;
+	bool b_smooth;
+	int i_smooth;
 
 	bool visuals_toggle;
 	bool b_recoil;

@@ -101,12 +101,28 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 				}
 			}
 		}
+		
+		if ( config::b_view_fov )
+			aimbot::fov( ImVec2( ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2 ), config::i_fov * 6.2832 , config::view_fov );
 
+		if( config::b_aimbot )
+			aimbot::aimbot();
+
+		if( config::b_trigger )
+		{
+			const auto plocal_actor = *reinterpret_cast<CActor**>( ironsight_base + 0xA88B34 );
+			const auto ptrigger = reinterpret_cast<uintptr_t*>( ironsight_base + 0xA906CD );
+			if( plocal_actor )
+			{
+				if (*reinterpret_cast<BYTE*>( ptrigger ))
+				{
+					plocal_actor->m_attacking = true;
+				}
+			}
+		}
+		
 		render::end();
 	}
-
-	if ( config::b_aimbot )
-		aimbot::aimbot();
 
 	misc::misc_context();
 	
