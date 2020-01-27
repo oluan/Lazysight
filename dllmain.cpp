@@ -13,7 +13,7 @@ DWORD __stdcall thread( LPVOID lparam )
 	freopen_s( &f_ptr, "CONOUT$", "w", stdout );
 	SetConsoleTitle( TEXT( "Lazysight" ) );
 
-	ironsight_base = reinterpret_cast< uintptr_t >( GetModuleHandleA( nullptr ) );
+	ironsight_base = reinterpret_cast< uintptr_t >( GetModuleHandle( nullptr ) );
 
 	const auto RtlInsertInvertedFunctionTable = reinterpret_cast< f_RtlInsertInvertedFunctionTable >( helpers::find_pattern_module( "ntdll.dll",
 		"\x8B\xFF\x55\x8B\xEC\x83\xEC\x0C\x53\x56\x57\x8D\x45\xF8\x8B\xFA", "xxxxxxxxxxxxxxxx" ) );

@@ -62,26 +62,26 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 		// g_entity_manager 8B 0D ? ? ? ? 85 C9 74 15 83 C8 FF F0 0F C1 41 ? 48 75 0A 85 C9 74 06 8B 01 6A 01 FF 10 E8 ? ? ? ? 
 		auto pentity_mgr = *reinterpret_cast< CEntityManager** >( ironsight_base + 0xA88B30 );
 
-		if ( pentity_mgr )
+		__try
 		{
-			// g_local_actor -> g_entity_manager + 0x4
-			const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
-			const auto pentity_list = pentity_mgr->m_list;
-
-			if ( pentity_list )
+			if ( pentity_mgr )
 			{
-				auto pentity_node = pentity_list->m_head;
+				// g_local_actor -> g_entity_manager + 0x4
+				const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
+				const auto pentity_list = pentity_mgr->m_list;
 
-				if ( pentity_node )
+				if ( pentity_list )
 				{
-					__try
+					auto pentity_node = pentity_list->m_head;
+
+					if ( pentity_node )
 					{
 						while ( pentity_node != reinterpret_cast< CEntityNode* >( pentity_list ) )
 						{
 							auto pentity = pentity_node->m_instance;
 
 							if ( pentity != plocal_actor && pentity->m_vtable_ptr == plocal_actor->m_vtable_ptr &&
-								pentity->is_alive() )
+								 pentity->is_alive() )
 							{
 								const auto b_isenemy = pentity->m_teamid != plocal_actor->m_teamid;
 
@@ -93,31 +93,30 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 							pentity_node = pentity_node->m_next;
 						}
 					}
-
-					__except ( EXCEPTION_EXECUTE_HANDLER )
-					{
-						//nothing here
-					}
 				}
 			}
 		}
-		
+
+		__except ( EXCEPTION_EXECUTE_HANDLER )
+		{
+			//do nothing here
+		}
+
 		if ( config::b_view_fov )
 			aimbot::fov( ImVec2( ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2 ), config::i_fov * 6.2832 , config::view_fov );
 
 		if( config::b_aimbot )
 			aimbot::aimbot();
 
-		if( config::b_trigger )
+		if ( config::b_trigger )
 		{
-			const auto plocal_actor = *reinterpret_cast<CActor**>( ironsight_base + 0xA88B34 );
-			const auto ptrigger = reinterpret_cast<uintptr_t*>( ironsight_base + 0xA906CD );
-			if( plocal_actor )
+			const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
+			const auto ptrigger     = reinterpret_cast< uintptr_t* >( ironsight_base + 0xA906CD );
+
+			if ( plocal_actor )
 			{
-				if (*reinterpret_cast<BYTE*>( ptrigger ))
-				{
+				if ( *reinterpret_cast< BYTE* >( ptrigger ) )
 					plocal_actor->m_attacking = true;
-				}
 			}
 		}
 		
