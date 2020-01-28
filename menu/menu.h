@@ -85,7 +85,7 @@ namespace menu
 		if ( b_render_menu )
 		{
 			ImGui::SetNextWindowSize( ImVec2( 415.f, 240.f ) );
-			ImGui::GetIO().MouseDrawCursor = true;
+			//ImGui::GetIO().MouseDrawCursor = true;
 
 			if ( ImGui::Begin( "Lazysight" , nullptr , ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse |  ImGuiWindowFlags_NoResize ) )
 			{
@@ -148,9 +148,8 @@ namespace menu
 
 					ImGui::Text( "Player" );
 					ImGui::BeginChild( 4 , ImVec2( 390, 50 ) , true );
-					add_item( "Speed Hack", &config::b_speed );
 					add_item( "Stamina", &config::b_stamina );
-					add_item( "Speed", &config::b_speed, false );
+					add_item( "Speed Hack", &config::b_speed );
 					ImGui::SliderInt( "*", &config::i_speed, 1, 30 );
 					ImGui::EndChild();
 
@@ -170,6 +169,6 @@ namespace menu
 			}
 		}
 
-		else ImGui::GetIO().MouseDrawCursor = false;
+		//else ImGui::GetIO().MouseDrawCursor = false;
 	}
 }
