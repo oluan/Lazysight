@@ -149,7 +149,9 @@ namespace menu
 					ImGui::Text( "Player" );
 					ImGui::BeginChild( 4 , ImVec2( 390, 50 ) , true );
 					add_item( "Speed Hack", &config::b_speed );
-					ImGui::SliderInt( "##SpeedSlider", &config::i_speed , 1 , 10 );
+					add_item( "Stamina", &config::b_stamina );
+					add_item( "Speed", &config::b_speed, false );
+					ImGui::SliderInt( "*", &config::i_speed, 1, 30 );
 					ImGui::EndChild();
 
 					ImGui::Text( " " );

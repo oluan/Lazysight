@@ -32,7 +32,15 @@ public:
 	float m_speed_rightleft_down; //0x02C4
 	float m_speed_back_down; //0x02C8
 	float m_speed_scope_down; //0x02CC
-	char pad_02D0[152]; //0x02D0
+	char pad_02D0[4]; //0x02D0
+	float m_speed_forward_lying; //0x02D4
+	float m_speed_rightleft_lying; //0x02D8
+	float m_speed_back_lying; //0x02DC
+	char pad_02E0[20]; //0x02E0
+	float m_speed_rise; //0x02F4
+	float m_speed_lie_down; //0x02F8
+	float m_speed_squat_down; //0x02FC
+	char pad_0300[104]; //0x0300
 	Vector3 m_head_coords; //0x0368
 	char pad_0374[72]; //0x0374
 	float m_camera_view; //0x03BC
@@ -48,5 +56,4 @@ public:
 	char pad_08CA[58]; //0x08CA
 	float m_max_health; //0x0904
 	inline bool is_alive() { return this->m_health > 0.0f; };
-}; //Size: 0x08CA
-
+}; //Size: 0x0908
