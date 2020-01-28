@@ -20,11 +20,13 @@ namespace config
 	extern bool b_trigger;
 	extern bool b_smooth;
 	extern int i_smooth;
-	
+
 	extern bool visuals_toggle;
 	extern bool b_recoil;
 	extern bool b_spread;
 	extern bool b_stamina;
 	extern bool b_speed;
 	extern int i_speed;
+
+	extern float f_accumulative;
 }

@@ -7,6 +7,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "../config/config.h"
+
 
 namespace render
 {
@@ -70,10 +72,10 @@ namespace render
 		ImGui::GetCurrentWindow()->DrawList->AddLine( from , to , ImGui::GetColorU32( col ), thickness );
 	}
 
-	static float draw_text( const std::string& text, ImVec2 pos, float size, float* color, bool center = true ) noexcept
+	static void draw_text( const std::string& text, ImVec2 pos, float size, float* color, bool center = true ) noexcept
 	{
 		ImGuiWindow* window = ImGui::GetCurrentWindow();
-
+		pos.y += config::f_accumulative;
 
 		std::stringstream stream(text);
 		std::string line;
@@ -91,7 +93,7 @@ namespace render
 		window->DrawList->AddText(ImGui::GetDefaultFont(), size, ImVec2(pos.x , pos.y ), ImGui::GetColorU32( color ), text.c_str());
 
 
-		return pos.y + text_size.y;
+		config::f_accumulative += text_size.y;
 
 	}
 
@@ -127,8 +129,8 @@ namespace render
 		ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( col ) , 0.0f , 15 , thickness ) ;
 	}
 
-	static void circle( const ImVec2 position , const float radius , float* color , const float thickness = 0.4f )
+	static void draw_circle( const ImVec2 position , const float radius , float* color , const float thickness = 0.4f )
 	{
-		ImGui::GetCurrentWindow()->DrawList->AddCircle( ImVec2( position.x , position.y ) , radius , ImGui::GetColorU32( color ) , 128 , thickness );
+		ImGui::GetCurrentWindow()->DrawList->AddCircle( position , radius , ImGui::GetColorU32( color ) , 128 , thickness );
 	}
 }

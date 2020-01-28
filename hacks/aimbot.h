@@ -1,5 +1,6 @@
 #pragma once
 #include "../ironsight/sdk.h"
+extern bool g_aim_key_down;
 
 namespace aimbot
 {
@@ -61,9 +62,9 @@ namespace aimbot
 	{
 		ImGuiIO& io = ImGui::GetIO();
 
-		//g_local_actor -> g_entity_manager + 0x4
-		if ( io.MouseDownDuration[0] > 0.0f )
+		if ( g_aim_key_down )
 		{
+			//g_local_actor -> g_entity_manager + 0x4
 			const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
 			const auto ptarget      = get_nearest_entity( plocal_actor );
 
@@ -119,6 +120,6 @@ namespace aimbot
 
 	static void fov( const ImVec2 position, const int radius, float* color ) noexcept
 	{
-		render::circle( position, static_cast< float >( radius ), color );
+		render::draw_circle( position, static_cast< float >( radius ), color );
 	}
 }

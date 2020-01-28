@@ -29,4 +29,6 @@ namespace config
 	bool b_stamina;
 	bool b_speed;
 	int i_speed = 1.0f;
+
+	float f_accumulative;
 }

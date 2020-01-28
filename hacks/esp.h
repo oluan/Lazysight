@@ -68,4 +68,70 @@ namespace esp
 		sprintf_s( buffer, "%S", pentity->m_name );
 		render::draw_text( buffer , ImVec2( foot.x , foot.y ) , 12.f , is_enemy ? config::enemy_name : config::ally_name );
 	}
+
+	static void hp_text( CActor* pentity , bool is_enemy ) noexcept
+	{
+		auto foot = pentity->m_coordinates;
+
+		if ( !sdk::world_to_screen( foot ) )
+			return;
+
+		foot.y += 8;
+
+		const auto hpmax = pentity->m_max_health;
+		const auto hpnow = pentity->m_health;
+
+		const auto percent = ( hpnow / hpmax ) * 100;
+		char buffer[255];
+		sprintf_s( buffer, "%u", static_cast< unsigned int >( percent ) );
+
+		if ( percent == 100 )
+		{
+			float color[] = { 0.f , 174.f / 255.f , 12.f / 255.f };
+			render::draw_text( buffer , ImVec2( foot.x , foot.y ) , 12.f , color );
+		}
+		else if ( percent > 80 )
+		{
+			float color[] = { 232.f / 255.f , 232.f / 255.f , 26.f / 255.f };
+			render::draw_text( buffer , ImVec2( foot.x , foot.y ) , 12.f , color );
+		}
+		else if ( percent > 70 )
+		{
+			float color[] = { 232.f / 255.f , 191.f / 255.f , 26.f / 255.f };
+			render::draw_text( buffer , ImVec2( foot.x , foot.y ) , 12.f , color );
+		}
+		else if ( percent > 50 )
+		{
+			float color[] = { 232.f / 255.f , 163.f / 255.f , 26.f / 255.f };
+			render::draw_text( buffer , ImVec2( foot.x , foot.y ) , 12.f , color );
+		}
+		else if ( percent > 30 )
+		{
+			float color[] = { 232.f / 255.f , 136.f / 255.f , 26.f / 255.f };
+			render::draw_text( buffer , ImVec2( foot.x , foot.y ) , 12.f , color );
+		}
+		else if ( percent > 20 )
+		{
+			float color[] = { 232.f / 255.f , 115.f / 255.f , 26.f / 255.f };
+			render::draw_text( buffer , ImVec2( foot.x , foot.y ) , 12.f , color );
+		}
+		else if ( percent > 10 )
+		{
+			float color[] = { 232.f / 255.f , 60.f / 255.f , 26.f / 255.f };
+			render::draw_text( buffer , ImVec2( foot.x , foot.y ) , 12.f , color );
+		}
+		else
+		{
+			float color[] = { 1.f , 0.f , 0.f };
+			render::draw_text( buffer , ImVec2( foot.x , foot.y ) , 12.f , color );
+		}
+	}
+
+	static void hpbar( CActor* pentity , bool is_enemy ) noexcept
+	{
+		const auto hpmax = pentity->m_max_health;
+		const auto hpnow = pentity->m_health;
+
+		const auto percent = ( hpnow / hpmax ) * 1000;
+	}
 }

@@ -18,9 +18,17 @@ WNDPROC o_wndproc = nullptr;
 HWND g_hwnd = nullptr;
 bool b_render_menu = false;
 
+// todo: set a key selector on menu
+bool g_aim_key_down = false;
+
 LRESULT wnd_proc( const HWND hwnd, const UINT u_msg, const WPARAM w_param, const LPARAM l_param )
 {
 	extern LRESULT ImGui_ImplWin32_WndProcHandler( HWND, UINT, WPARAM, LPARAM );
+	
+	if ( u_msg == WM_LBUTTONDOWN )
+		g_aim_key_down = true;
+	else if ( u_msg == WM_LBUTTONUP )
+		g_aim_key_down = false;
 
 	if ( u_msg == WM_KEYUP && w_param == VK_INSERT )
 		b_render_menu = !b_render_menu;
@@ -61,13 +69,13 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 
 		// g_entity_manager 8B 0D ? ? ? ? 85 C9 74 15 83 C8 FF F0 0F C1 41 ? 48 75 0A 85 C9 74 06 8B 01 6A 01 FF 10 E8 ? ? ? ? 
 		const auto pentity_mgr  = *reinterpret_cast< CEntityManager** >( ironsight_base + 0xA88B30 );
+		// g_local_actor -> g_entity_manager + 0x4
 		const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
 
 		if ( pentity_mgr && plocal_actor )
 		{
 			__try
 			{	
-				// g_local_actor -> g_entity_manager + 0x4
 				const auto pentity_list = pentity_mgr->m_list;
 				
 				if ( pentity_list )
@@ -84,10 +92,12 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 								pentity->is_alive() )
 							{
 								const auto b_isenemy = pentity->m_teamid != plocal_actor->m_teamid;
+								config::f_accumulative = 0;
 
 								esp::line_esp( pentity, b_isenemy );
 								esp::box2d( pentity, b_isenemy );
 								esp::name_esp( pentity, b_isenemy );
+								esp::hp_text( pentity , b_isenemy );
 							}
 
 							pentity_node = pentity_node->m_next;
@@ -111,7 +121,7 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 		if ( config::b_trigger )
 		{
 			const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
-			const auto ptrigger     = reinterpret_cast< BYTE* >( ironsight_base + 0xA906CD );
+			const auto ptrigger     = reinterpret_cast< byte* >( ironsight_base + 0xA906CD );
 
 			if ( plocal_actor )
 			{
