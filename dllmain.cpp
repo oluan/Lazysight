@@ -37,6 +37,7 @@ DWORD __stdcall thread( LPVOID lparam )
 
 	const auto p_device = **reinterpret_cast< uintptr_t*** >( g_render + 0x20 );
 	const auto present  = p_device[17];
+	const auto reset    = p_device[16];	
 
 	if ( MH_Initialize() != MH_OK )
 	{
@@ -47,6 +48,12 @@ DWORD __stdcall thread( LPVOID lparam )
 	if ( MH_CreateHook( reinterpret_cast< LPVOID >( present ) , &hk_present , reinterpret_cast< LPVOID* >( &o_present ) ) != MH_OK )
 	{
 		printf( "[Lazysight] Failed to create hook at Present\n" );
+		return 0;
+	}
+
+	if ( MH_CreateHook( reinterpret_cast< LPVOID >( reset ) , &hk_reset , reinterpret_cast< LPVOID* >( &o_reset ) ) != MH_OK )
+	{
+		printf( "[Lazysight] Failed to create hook at Reset\n" );
 		return 0;
 	}
 

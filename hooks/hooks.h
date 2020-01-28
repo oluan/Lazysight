@@ -141,3 +141,17 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 
 	return o_present( p_device, p_src_rect, p_dest_rect, h_dest_window, p_dirty_region );
 }
+
+using fn_reset = long( __stdcall* )( IDirect3DDevice9*, D3DPRESENT_PARAMETERS* );
+fn_reset o_reset = nullptr;
+
+long __stdcall hk_reset( IDirect3DDevice9* p_device, D3DPRESENT_PARAMETERS* p_presentation_parameters )
+{
+	ImGui_ImplDX9_InvalidateDeviceObjects();
+
+	const auto ret = o_reset( p_device , p_presentation_parameters );
+
+	ImGui_ImplDX9_CreateDeviceObjects();
+
+	return ret;
+}
