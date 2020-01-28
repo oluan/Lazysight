@@ -35,8 +35,8 @@ namespace misc
 			const auto plocal_actor = *reinterpret_cast<CActor**>(ironsight_base + 0xA88B34);
 			if (plocal_actor)
 			{
-				plocal_actor->m_max_stamina = 999999;
-				plocal_actor->m_stamina = 999999;
+				plocal_actor->m_max_stamina = 999999.0f;
+				plocal_actor->m_stamina = 999999.0f;
 			}
 		}
 		if( config::b_speed )
@@ -53,6 +53,12 @@ namespace misc
 				plocal_actor->m_speed_rightleft_down = 249.000f * (float)config::i_speed;
 				plocal_actor->m_speed_back_down = 218.000f * (float)config::i_speed;
 				plocal_actor->m_speed_scope_down = 0.500f * (float)config::i_speed;
+				plocal_actor->m_speed_forward_lying = (78.000f * 2.0f) * (float)config::i_speed;
+				plocal_actor->m_speed_rightleft_lying = (62.000f * 2.0f) * (float)config::i_speed;
+				plocal_actor->m_speed_back_lying = (54.000f * 2.0f) * (float)config::i_speed;
+				plocal_actor->m_speed_rise =  10000.0f; //220.000f
+				plocal_actor->m_speed_lie_down =  10000.0f; //160.000f
+				plocal_actor->m_speed_squat_down =  10000.0f; //240.000f
 			}
 		}
 	}

@@ -126,7 +126,7 @@ namespace menu
 					add_item( "No spread" , &config::b_spread  ,false );
 					add_item( "Stamina" , &config::b_stamina );
 					add_item( "Speed", &config::b_speed , false );
-					ImGui::SliderInt( "*" , &config::i_speed , 1 , 10 );
+					ImGui::SliderInt( "*" , &config::i_speed , 1 , 30 );
 					ImGui::PushStyleColor( ImGuiCol_Button , { 1.f , 0.f , 0.f , 1.f } );
 					if ( ImGui::Button( "Unload" ) )
 					{
