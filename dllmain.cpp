@@ -13,7 +13,7 @@ DWORD __stdcall thread( LPVOID lparam )
 	freopen_s( &f_ptr, "CONOUT$", "w", stdout );
 	SetConsoleTitle( TEXT( "Lazysight" ) );
 
-	ironsight_base = reinterpret_cast< uintptr_t >( GetModuleHandle( nullptr ) );
+	ironsight_base = reinterpret_cast< uintptr_t >( GetModuleHandleA( nullptr ) );
 
 	const auto RtlInsertInvertedFunctionTable = reinterpret_cast< f_RtlInsertInvertedFunctionTable >( helpers::find_pattern_module( "ntdll.dll",
 		"\x8B\xFF\x55\x8B\xEC\x83\xEC\x0C\x53\x56\x57\x8D\x45\xF8\x8B\xFA", "xxxxxxxxxxxxxxxx" ) );
@@ -38,6 +38,10 @@ DWORD __stdcall thread( LPVOID lparam )
 	const auto p_device = **reinterpret_cast< uintptr_t*** >( g_render + 0x20 );
 	const auto present  = p_device[17];
 
+	auto rva = reinterpret_cast<uintptr_t*>(ironsight_base + 0x10FFB0);
+	o_sub_C6FFB0 = reinterpret_cast<sub_C6FFB0>(Initialize(&Hook::hook, reinterpret_cast<void*>(rva), my_sub_C6FFB0, "sub_C6FFB0", 6, Hook::hook.hook_func_legal1));
+	rva = reinterpret_cast<uintptr_t*>(ironsight_base + 0x29F1D0);
+	o_sub_E001D0 = reinterpret_cast<sub_E001D0>(Initialize(&Hook::hook, reinterpret_cast<void*>(rva), my_sub_E001D0, "sub_E001D0", 7, Hook::hook.hook_func_legal2));
 	if ( MH_Initialize() != MH_OK )
 	{
 		printf( "[Lazysight] Failed to init MinHook\n" );
