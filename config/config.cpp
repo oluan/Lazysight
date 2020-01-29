@@ -8,6 +8,12 @@ namespace config
 	float enemy_box[3];
 	float ally_name[3];
 	float enemy_name[3];
+	float ally_distance[3];
+    float enemy_distance[3];
+	float ally_hp[3];
+	float enemy_hp[3];
+	float ally_hp_bar[3];
+	float enemy_hp_bar[3];
 	float view_fov[3];
 
 	bool b_enemy_line;
@@ -16,6 +22,12 @@ namespace config
 	bool b_ally_box;
 	bool b_enemy_name;
 	bool b_ally_name;
+	bool b_enemy_distance;
+	bool b_ally_distance;
+	bool b_enemy_hp;
+	bool b_ally_hp;
+	bool b_enemy_hp_bar;
+	bool b_ally_hp_bar;
 	bool b_aimbot;
 	bool b_view_fov;
 	int i_fov = 30;

@@ -92,12 +92,15 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 								pentity->is_alive() )
 							{
 								const auto b_isenemy = pentity->m_teamid != plocal_actor->m_teamid;
+								const auto distance = plocal_actor->m_head_coords.get_3d_distance( pentity->m_head_coords );
 								config::f_accumulative = 0;
 
-								esp::line_esp( pentity, b_isenemy );
-								esp::box2d( pentity, b_isenemy );
-								esp::name_esp( pentity, b_isenemy );
+								esp::line_esp( pentity , b_isenemy );
+								esp::box2d( pentity , b_isenemy );
+								esp::name_esp( pentity , b_isenemy );
 								esp::hp_text( pentity , b_isenemy );
+								esp::hp_bar( pentity, b_isenemy );
+								esp::distance_esp( pentity , distance , b_isenemy);
 							}
 
 							pentity_node = pentity_node->m_next;
