@@ -6,6 +6,10 @@ namespace config
 	extern float enemy_box[3];
 	extern float ally_name[3];
 	extern float enemy_name[3];
+	extern float ally_distance[3];
+	extern float enemy_distance[3];
+	extern float ally_hp_bar[3];
+	extern float enemy_hp_bar[3];
 	extern float view_fov[3];
 
 	extern bool b_enemy_line;
@@ -14,6 +18,12 @@ namespace config
 	extern bool b_ally_box;
 	extern bool b_enemy_name;
 	extern bool b_ally_name;
+	extern bool b_enemy_distance;
+	extern bool b_ally_distance;
+	extern bool b_enemy_hp;
+	extern bool b_ally_hp;
+	extern bool b_enemy_hp_bar;
+	extern bool b_ally_hp_bar;
 	extern bool b_aimbot;
 	extern bool b_view_fov;
 	extern int i_fov;

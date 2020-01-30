@@ -19,8 +19,23 @@ namespace misc
 			plocal_actor->m_pweaponinfo->m_spread = 0.0f;
 	}
 
+	static void weapon_fire() noexcept
+	{
+		const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
+		const auto ptrigger = reinterpret_cast< byte* >( ironsight_base + 0xA906CD );
+
+		if ( plocal_actor )
+		{
+			if ( *ptrigger )
+				plocal_actor->m_attacking = true;
+		}
+	}
+	
 	static void misc_context() noexcept
 	{
+		if  (config::b_trigger )
+			weapon_fire();
+		
 		if ( config::b_recoil )
 			weapon_recoil();
 
