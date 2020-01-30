@@ -34,7 +34,7 @@ namespace aimbot
 							if ( pentity != plocal_actor && pentity->m_vtable_ptr == plocal_actor->m_vtable_ptr &&
 								pentity->is_alive() && pentity->m_teamid != plocal_actor->m_teamid )
 							{
-								auto distance = plocal_actor->m_head_coords.get_3d_distance( pentity->m_head_coords );
+								const auto distance = plocal_actor->m_head_coords.get_3d_distance( pentity->m_head_coords );
 
 								if ( distance < lowest_distance )
 								{
@@ -60,8 +60,6 @@ namespace aimbot
 
 	static void aimbot() noexcept
 	{
-		ImGuiIO& io = ImGui::GetIO();
-
 		if ( g_aim_key_down )
 		{
 			//g_local_actor -> g_entity_manager + 0x4
@@ -76,7 +74,7 @@ namespace aimbot
 			const auto distance_z = plocal_actor->m_head_coords.get_distance_z( ptarget->m_head_coords );
 			const auto distance   = plocal_actor->m_head_coords.get_3d_distance( ptarget->m_head_coords );
 
-			float y = 0.0f;
+			auto y = 0.0f;
 
 			if ( ptarget->m_head_coords.x < plocal_actor->m_head_coords.x &&
 				ptarget->m_head_coords.z > plocal_actor->m_head_coords.z )

@@ -130,7 +130,7 @@ namespace esp
 		}
 	}
 
-	static void hp_bar( CActor* pentity , bool is_enemy ) noexcept
+	static void hp_bar( CActor* pentity , const bool is_enemy ) noexcept
 	{
 		if ( is_enemy && !config::b_enemy_hp_bar ) return;
 		if ( !is_enemy && !config::b_ally_hp_bar) return;

@@ -112,7 +112,7 @@ namespace menu
 
 					ImGui::Text(" ");
 
-					ImGui::BeginChild( 1 , ImVec2( 390 , 120 ) , true);
+					ImGui::BeginChild( 1 , ImVec2( 390 , 210 ) , true);
 					add_item_with_color( "ESP Line Enemy" , &config::b_enemy_line , config::enemy_line );
 					add_item_with_color( "ESP Line Ally", &config::b_ally_line, config::ally_line );
 					add_item_with_color( "ESP Box 2D Enemy" , &config::b_enemy_box , config::enemy_box );
@@ -121,8 +121,8 @@ namespace menu
 					add_item_with_color( "ESP Name Ally" , &config::b_ally_name , config::ally_name );
 					add_item_with_color( "ESP Distance Enemy" , &config::b_enemy_distance, config::enemy_distance );
 					add_item_with_color( "ESP Distance Ally" , &config::b_ally_distance, config::ally_distance );
-					add_item_with_color("ESP HP Enemy", &config::b_enemy_hp, config::enemy_hp);
-					add_item_with_color("ESP HP Ally", &config::b_ally_hp, config::ally_hp);
+					add_item("ESP HP Enemy", &config::b_enemy_hp);
+					add_item("ESP HP Ally", &config::b_ally_hp);
 					add_item_with_color("ESP HP Bar Enemy", &config::b_enemy_hp_bar, config::enemy_hp_bar);
 					add_item_with_color("ESP HP Bar Ally", &config::b_ally_hp_bar, config::ally_hp_bar);
 					ImGui::EndChild();

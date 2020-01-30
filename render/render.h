@@ -129,10 +129,10 @@ namespace render
 		ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( col ) , 0.0f , 15 , thickness ) ;
 	}
 
-	static void draw_bar( const float x , const float y , const float w , const float h , const float current_life , float* col , float* col2 , const float thickness = 0.4f )
+	static void draw_bar( const float x , const float y , const float w , const float h , const float h_filled , float* col , float* col2 , const float thickness = 0.4f )
 	{
 		ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x , y ), ImVec2( x + w , y + h ) , ImGui::GetColorU32( col ) , 0.0f , 15 , thickness );
-		ImGui::GetCurrentWindow()->DrawList->AddRectFilled( ImVec2( x + 1.0f , y + 1.0f ), ImVec2( x + 2.0f , y + current_life - 1.0f ), ImGui::GetColorU32( col2 ), 0, 15 );
+		ImGui::GetCurrentWindow()->DrawList->AddRectFilled( ImVec2( x + 1.0f , y + 1.0f ), ImVec2( x + 2.0f , y + h_filled - 1.0f ), ImGui::GetColorU32( col2 ), 0, 15 );
 	}
 	
 	static void draw_circle( const ImVec2 position , const float radius , float* color , const float thickness = 0.4f )

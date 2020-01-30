@@ -8,8 +8,6 @@ namespace config
 	extern float enemy_name[3];
 	extern float ally_distance[3];
 	extern float enemy_distance[3];
-	extern float ally_hp[3];
-	extern float enemy_hp[3];
 	extern float ally_hp_bar[3];
 	extern float enemy_hp_bar[3];
 	extern float view_fov[3];

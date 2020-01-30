@@ -10,8 +10,6 @@ namespace config
 	float enemy_name[3];
 	float ally_distance[3];
     float enemy_distance[3];
-	float ally_hp[3];
-	float enemy_hp[3];
 	float ally_hp_bar[3];
 	float enemy_hp_bar[3];
 	float view_fov[3];
@@ -33,7 +31,7 @@ namespace config
 	int i_fov = 30;
 	bool b_trigger;
 	bool b_smooth;
-	int i_smooth;
+	int i_smooth = 1;
 
 	bool visuals_toggle;
 	bool b_recoil;
