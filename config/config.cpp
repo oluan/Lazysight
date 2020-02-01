@@ -28,10 +28,11 @@ namespace config
 	bool b_ally_hp_bar;
 	bool b_aimbot;
 	bool b_view_fov;
-	int i_fov = 30;
+	bool b_nearest_by_fov;
+	int i_fov = 5;
 	bool b_trigger;
 	bool b_smooth;
-	int i_smooth = 1;
+	int i_smooth = 5;
 
 	bool visuals_toggle;
 	bool b_recoil;

@@ -26,6 +26,7 @@ namespace config
 	extern bool b_ally_hp_bar;
 	extern bool b_aimbot;
 	extern bool b_view_fov;
+	extern bool b_nearest_by_fov;
 	extern int i_fov;
 	extern bool b_trigger;
 	extern bool b_smooth;

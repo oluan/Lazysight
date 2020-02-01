@@ -89,6 +89,8 @@ namespace menu
 
 			if ( ImGui::Begin( "Lazysight" , nullptr , ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse |  ImGuiWindowFlags_NoResize ) )
 			{
+				const char* s_get_nearest_by[2] = { "Aimbot by: Distance", "Aimbot by: Fov" };
+				
 				static auto tab = 0;
 				const auto style = &ImGui::GetStyle();
 				style->FramePadding = ImVec2(5, 8);
@@ -112,7 +114,7 @@ namespace menu
 
 					ImGui::Text(" ");
 
-					ImGui::BeginChild( 1 , ImVec2( 390 , 210 ) , true);
+					ImGui::BeginChild( 1 , ImVec2( 390 , 220 ) , true);
 					add_item_with_color( "ESP Line Enemy" , &config::b_enemy_line , config::enemy_line );
 					add_item_with_color( "ESP Line Ally", &config::b_ally_line, config::ally_line );
 					add_item_with_color( "ESP Box 2D Enemy" , &config::b_enemy_box , config::enemy_box );
@@ -133,11 +135,14 @@ namespace menu
 
 					ImGui::Text(" ");
 					
-					ImGui::BeginChild( 2 , ImVec2( 390 , 100 ) , true);
+					ImGui::BeginChild( 2 , ImVec2( 390 , 125 ) , true);
 					add_item("Trigger", &config::b_trigger);
 					add_item( "Smooth" , &config::b_smooth );
 					ImGui::SliderInt( "value" , &config::i_smooth , 1 , 15 );
-					add_item( "Fov", &config::b_view_fov );
+					
+					add_item( s_get_nearest_by[ config::b_nearest_by_fov ] , &config::b_nearest_by_fov );
+					
+					add_item( "Draw fov", &config::b_view_fov );
 					ImGui::SliderInt( "value ", &config::i_fov , 1 , 360 );
 					ImGui::SameLine();
 					ImGui::ColorEdit4( "fov_color" , config::view_fov , ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel );
@@ -153,7 +158,7 @@ namespace menu
 					ImGui::EndChild();
 
 					ImGui::Text( "Player" );
-					ImGui::BeginChild( 4 , ImVec2( 390, 50 ) , true );
+					ImGui::BeginChild( 4 , ImVec2( 390, 65 ) , true );
 					add_item( "Stamina", &config::b_stamina );
 					add_item( "Speed Hack", &config::b_speed );
 					ImGui::SliderInt( "*", &config::i_speed, 1, 30 );
