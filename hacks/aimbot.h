@@ -77,7 +77,7 @@ namespace aimbot
 
 					if ( pentity_node )
 					{
-						while ( pentity_node != reinterpret_cast< CEntityNode* >( pentity_list ) )
+						for ( ;pentity_node != reinterpret_cast< CEntityNode* >( pentity_list ); )
 						{
 							auto pentity = pentity_node->m_instance;
 

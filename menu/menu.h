@@ -89,7 +89,7 @@ namespace menu
 
 			if ( ImGui::Begin( "Lazysight" , nullptr , ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoCollapse |  ImGuiWindowFlags_NoResize ) )
 			{
-				const char* s_get_nearest_by[2] = { "Distance", "Fov" };
+				const char* s_get_nearest_by[2] = { "Aimbot by: Distance", "Aimbot by: Fov" };
 				
 				static auto tab = 0;
 				const auto style = &ImGui::GetStyle();
