@@ -14,8 +14,8 @@
 #include "../hacks/misc.h"
 #include "../menu/menu.h"
 
-WNDPROC o_wndproc = nullptr;
-HWND g_hwnd = nullptr;
+WNDPROC o_wndproc  = nullptr;
+HWND g_hwnd        = nullptr;
 bool b_render_menu = false;
 
 // todo: set a key selector on menu
@@ -27,6 +27,7 @@ LRESULT wnd_proc( const HWND hwnd, const UINT u_msg, const WPARAM w_param, const
 	
 	if ( u_msg == WM_LBUTTONDOWN )
 		g_aim_key_down = true;
+
 	else if ( u_msg == WM_LBUTTONUP )
 		g_aim_key_down = false;
 
@@ -45,6 +46,7 @@ fn_present o_present = nullptr;
 long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, const RECT* p_dest_rect, HWND h_dest_window, const RGNDATA* p_dirty_region )
 {
 	static std::once_flag o_flag;
+
 	std::call_once( o_flag, [p_device]()
 	{
 		g_hwnd = FindWindow( nullptr, TEXT( "ironsight - 1.4.383.63755" ) );
@@ -64,20 +66,21 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 	menu::render();
 
 	if ( config::visuals_toggle )
-	{	
+	{
 		render::start();
 
 		// g_entity_manager 8B 0D ? ? ? ? 85 C9 74 15 83 C8 FF F0 0F C1 41 ? 48 75 0A 85 C9 74 06 8B 01 6A 01 FF 10 E8 ? ? ? ? 
-		const auto pentity_mgr  = *reinterpret_cast< CEntityManager** >( ironsight_base + 0xA88B30 );
+		const auto pentity_mgr = *reinterpret_cast< CEntityManager** >( ironsight_base + 0xA88B30 );
+
 		// g_local_actor -> g_entity_manager + 0x4
 		const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
 
 		if ( pentity_mgr && plocal_actor )
 		{
 			__try
-			{	
+			{
 				const auto pentity_list = pentity_mgr->m_list;
-				
+
 				if ( pentity_list )
 				{
 					auto pentity_node = pentity_list->m_head;
@@ -89,18 +92,19 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 							const auto pentity = pentity_node->m_instance;
 
 							if ( pentity != plocal_actor && pentity->m_vtable_ptr == plocal_actor->m_vtable_ptr &&
-								pentity->is_alive() )
+								 pentity->is_alive() )
 							{
 								const auto b_isenemy = pentity->m_teamid != plocal_actor->m_teamid;
 								const auto distance = plocal_actor->m_head_coords.get_3d_distance( pentity->m_head_coords );
+
 								config::f_accumulative = 0;
 
-								esp::line_esp( pentity , b_isenemy );
-								esp::box2d( pentity , b_isenemy );
-								esp::name_esp( pentity , b_isenemy );
-								esp::hp_text( pentity , b_isenemy );
+								esp::line_esp( pentity, b_isenemy );
+								esp::box2d( pentity, b_isenemy );
+								esp::name_esp( pentity, b_isenemy );
+								esp::hp_text( pentity, b_isenemy );
 								esp::hp_bar( pentity, b_isenemy );
-								esp::distance_esp( pentity , distance , b_isenemy);
+								esp::distance_esp( pentity, distance, b_isenemy );
 							}
 
 							pentity_node = pentity_node->m_next;
@@ -111,12 +115,12 @@ long __stdcall hk_present( IDirect3DDevice9* p_device, const RECT* p_src_rect, c
 
 			__except ( EXCEPTION_EXECUTE_HANDLER )
 			{
-				std::cout << "Exception!\n";
+				//do nothing
 			}
 		}
 
 		if ( config::b_view_fov )
-			aimbot::fov( ImVec2( ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2 ), config::i_fov * 6.2832 , config::view_fov );
+			aimbot::fov( ImVec2( ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2 ), config::i_fov * 6.2832, config::view_fov );
 
 		render::end();
 	}
@@ -140,7 +144,7 @@ long __stdcall hk_reset( IDirect3DDevice9* p_device, D3DPRESENT_PARAMETERS* p_pr
 {
 	ImGui_ImplDX9_InvalidateDeviceObjects();
 
-	const auto ret = o_reset( p_device , p_presentation_parameters );
+	const auto ret = o_reset( p_device, p_presentation_parameters );
 
 	ImGui_ImplDX9_CreateDeviceObjects();
 

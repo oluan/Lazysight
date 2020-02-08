@@ -14,14 +14,14 @@ namespace render
 {
 	static void start() noexcept
 	{
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 0.0f, 0.0f });
-		ImGui::PushStyleColor(ImGuiCol_WindowBg, { 0.0f, 0.0f, 0.0f, 0.0f });
+		ImGui::PushStyleVar( ImGuiStyleVar_WindowBorderSize, 0.0f );
+		ImGui::PushStyleVar( ImGuiStyleVar_WindowPadding, { 0.0f, 0.0f } );
+		ImGui::PushStyleColor( ImGuiCol_WindowBg, { 0.0f, 0.0f, 0.0f, 0.0f } );
 
-		ImGui::SetNextWindowPos(ImVec2(0, 0), ImGuiCond_Always);
-		ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y), ImGuiCond_Always);
+		ImGui::SetNextWindowPos( ImVec2( 0, 0 ), ImGuiCond_Always );
+		ImGui::SetNextWindowSize( ImVec2( ImGui::GetIO().DisplaySize.x, ImGui::GetIO().DisplaySize.y ), ImGuiCond_Always );
 
-		ImGui::Begin("##Canvas", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBringToFrontOnFocus );
+		ImGui::Begin( "##Canvas", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBringToFrontOnFocus );
 
 	}
 
@@ -33,7 +33,7 @@ namespace render
 		ImGui::PopStyleVar( 2 );
 	}
 
-	static void draw_line( D3DXVECTOR2 from , D3DXVECTOR2 to , float* col , const bool outlined = true , const float thickness = 0.4f ) noexcept
+	static void draw_line( D3DXVECTOR2 from, D3DXVECTOR2 to, float* col, const bool outlined = true, const float thickness = 0.4f ) noexcept
 	{
 		if ( outlined )
 		{
@@ -45,31 +45,30 @@ namespace render
 			to.x += 1;
 			to.y += 1;
 
-			ImGui::GetCurrentWindow()->DrawList->AddLine( from , to , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), thickness );
+			ImGui::GetCurrentWindow()->DrawList->AddLine( from, to, ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), thickness );
 
 			from.x -= 2;
 			to.x -= 2;
 
-			ImGui::GetCurrentWindow()->DrawList->AddLine( from , to , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), thickness );
+			ImGui::GetCurrentWindow()->DrawList->AddLine( from, to, ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), thickness );
 
 			from.x += 2;
 			from.y -= 2;
 			to.x += 2;
 			to.y -= 2;
 
-			ImGui::GetCurrentWindow()->DrawList->AddLine( from , to , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), thickness );
+			ImGui::GetCurrentWindow()->DrawList->AddLine( from, to, ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), thickness );
 
 			from.x -= 2;
 			to.x -= 2;
 
-			ImGui::GetCurrentWindow()->DrawList->AddLine( from , to , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), thickness );
+			ImGui::GetCurrentWindow()->DrawList->AddLine( from, to, ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), thickness );
 
 			from = b_from;
 			to = b_to;
-
-
 		}
-		ImGui::GetCurrentWindow()->DrawList->AddLine( from , to , ImGui::GetColorU32( col ), thickness );
+
+		ImGui::GetCurrentWindow()->DrawList->AddLine( from, to, ImGui::GetColorU32( col ), thickness );
 	}
 
 	static void draw_text( const std::string& text, ImVec2 pos, float size, float* color, bool center = true ) noexcept
@@ -77,27 +76,26 @@ namespace render
 		ImGuiWindow* window = ImGui::GetCurrentWindow();
 		pos.y += config::f_accumulative;
 
-		std::stringstream stream(text);
+		std::stringstream stream( text );
 		std::string line;
 
-		const auto text_size = ImGui::GetDefaultFont()->CalcTextSizeA(size, FLT_MAX, 0.0f, text.c_str());
-		if (center)
+		const auto text_size = ImGui::GetDefaultFont()->CalcTextSizeA( size, FLT_MAX, 0.0f, text.c_str() );
+
+		if ( center )
 			pos.x -= text_size.x / 2.0f;
 
 		// outline
-		window->DrawList->AddText(ImGui::GetDefaultFont(), size, ImVec2(pos.x + 1, pos.y + 1), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), text.c_str());
-		window->DrawList->AddText(ImGui::GetDefaultFont(), size, ImVec2(pos.x - 1, pos.y - 1), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), text.c_str());
-		window->DrawList->AddText(ImGui::GetDefaultFont(), size, ImVec2(pos.x + 1, pos.y - 1), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), text.c_str());
-		window->DrawList->AddText(ImGui::GetDefaultFont(), size, ImVec2(pos.x - 1, pos.y + 1), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), text.c_str());
-		
-		window->DrawList->AddText(ImGui::GetDefaultFont(), size, ImVec2(pos.x , pos.y ), ImGui::GetColorU32( color ), text.c_str());
+		window->DrawList->AddText( ImGui::GetDefaultFont(), size, ImVec2( pos.x + 1, pos.y + 1 ), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), text.c_str() );
+		window->DrawList->AddText( ImGui::GetDefaultFont(), size, ImVec2( pos.x - 1, pos.y - 1 ), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), text.c_str() );
+		window->DrawList->AddText( ImGui::GetDefaultFont(), size, ImVec2( pos.x + 1, pos.y - 1 ), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), text.c_str() );
+		window->DrawList->AddText( ImGui::GetDefaultFont(), size, ImVec2( pos.x - 1, pos.y + 1 ), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), text.c_str() );
 
+		window->DrawList->AddText( ImGui::GetDefaultFont(), size, ImVec2( pos.x, pos.y ), ImGui::GetColorU32( color ), text.c_str() );
 
 		config::f_accumulative += text_size.y;
-
 	}
 
-	static void draw_box( float x , float y, float w, float h, float* col , bool outlined = true , float thickness = 0.4f )
+	static void draw_box( float x, float y, float w, float h, float* col, bool outlined = true, float thickness = 0.4f )
 	{
 		if ( outlined )
 		{
@@ -107,36 +105,37 @@ namespace render
 			x += 1;
 			y += 1;
 
-			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) , 0.0f , 15 , thickness );
+			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ), ImVec2( x + w, y + h ), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), 0.0f, 15, thickness );
 
 			x -= 2;
 
-			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) , 0.0f , 15 , thickness );
+			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ), ImVec2( x + w, y + h ), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), 0.0f, 15, thickness );
 
 			x += 2;
 			y -= 2;
 
-			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) , 0.0f , 15 , thickness );
+			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ), ImVec2( x + w, y + h ), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), 0.0f, 15, thickness );
 
 			x -= 2;
 
-			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ) , 0.0f , 15 , thickness );
+			ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ), ImVec2( x + w, y + h ), ImGui::GetColorU32( { 0 , 0 , 0 , 1 } ), 0.0f, 15, thickness );
 
 			x = b_x;
 			y = b_y;
 
 		}
-		ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ) , ImVec2( x + w , y + h ) , ImGui::GetColorU32( col ) , 0.0f , 15 , thickness ) ;
+
+		ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ), ImVec2( x + w, y + h ), ImGui::GetColorU32( col ), 0.0f, 15, thickness );
 	}
 
-	static void draw_bar( const float x , const float y , const float w , const float h , const float h_filled , float* col , float* col2 , const float thickness = 0.4f )
+	static void draw_bar( const float x, const float y, const float w, const float h, const float h_filled, float* col, float* col2, const float thickness = 0.4f )
 	{
-		ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x , y ), ImVec2( x + w , y + h ) , ImGui::GetColorU32( col ) , 0.0f , 15 , thickness );
-		ImGui::GetCurrentWindow()->DrawList->AddRectFilled( ImVec2( x + 1.0f , y + 1.0f ), ImVec2( x + 2.0f , y + h_filled - 1.0f ), ImGui::GetColorU32( col2 ), 0, 15 );
+		ImGui::GetCurrentWindow()->DrawList->AddRect( ImVec2( x, y ), ImVec2( x + w, y + h ), ImGui::GetColorU32( col ), 0.0f, 15, thickness );
+		ImGui::GetCurrentWindow()->DrawList->AddRectFilled( ImVec2( x + 1.0f, y + 1.0f ), ImVec2( x + 2.0f, y + h_filled - 1.0f ), ImGui::GetColorU32( col2 ), 0, 15 );
 	}
 	
-	static void draw_circle( const ImVec2 position , const float radius , float* color , const float thickness = 0.4f )
+	static void draw_circle( const ImVec2 position, const float radius, float* color, const float thickness = 0.4f )
 	{
-		ImGui::GetCurrentWindow()->DrawList->AddCircle( position , radius , ImGui::GetColorU32( color ) , 128 , thickness );
+		ImGui::GetCurrentWindow()->DrawList->AddCircle( position, radius, ImGui::GetColorU32( color ), 128, thickness );
 	}
 }

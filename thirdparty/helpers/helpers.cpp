@@ -1,9 +1,9 @@
 #include "helpers.hpp"
 #include <Psapi.h>
 
-#define MEMORY_READABLE	  ( PAGE_READONLY | PAGE_READWRITE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE )
+#define MEMORY_READABLE	  ( PAGE_READONLY  | PAGE_READWRITE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE )
 #define MEMORY_WRITABLE	  ( PAGE_READWRITE | PAGE_EXECUTE_READWRITE )
-#define MEMORY_EXECUTABLE ( PAGE_EXECUTE | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE )
+#define MEMORY_EXECUTABLE ( PAGE_EXECUTE   | PAGE_EXECUTE_READ | PAGE_EXECUTE_READWRITE )
 
 bool bdata_compare( const char* pData, const char* pattern, const char* mask )
 {
@@ -16,7 +16,7 @@ bool bdata_compare( const char* pData, const char* pattern, const char* mask )
 	return !*mask;
 }
 
-uintptr_t findp( const uintptr_t base, const size_t size, const char* pattern, const char* mask )
+uintptr_t find_pattern_buffer( const uintptr_t base, const size_t size, const char* pattern, const char* mask )
 {
 	for ( size_t i = 0; i < size; ++i )
 		if ( bdata_compare( reinterpret_cast< const char* >( base + i ), pattern, mask ) )
@@ -50,7 +50,7 @@ uintptr_t helpers::read_multilevel_pointer( const uintptr_t base, const std::vec
 	if ( !is_address_readable( base ) || !offsets.size() )
 		return 0;
 
-	auto address = *reinterpret_cast< uintptr_t* >( base );
+	auto address      = *reinterpret_cast< uintptr_t* >( base );
 	auto offset_count = offsets.size();
 
 	for ( size_t i = 0; i < offset_count - 1; ++i )
@@ -80,7 +80,7 @@ uintptr_t helpers::find_pattern( const uintptr_t base, const size_t size, const 
 
 		if ( ( mbi.State == MEM_COMMIT ) && !( mbi.Protect & ( PAGE_NOACCESS | PAGE_GUARD ) ) )
 		{
-			auto result = findp( reinterpret_cast< const uintptr_t >( mbi.BaseAddress ), mbi.RegionSize, pattern, mask );
+			auto result = find_pattern_buffer( reinterpret_cast< const uintptr_t >( mbi.BaseAddress ), mbi.RegionSize, pattern, mask );
 
 			if ( result )
 				return result;

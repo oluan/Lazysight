@@ -4,8 +4,6 @@ D3DVIEWPORT9 g_view_port;
 
 namespace sdk
 {
-
-
 	static bool world_to_screen( Vector3 pos, Vector3& screen ) noexcept
 	{
 		static float view_matrix[16] = { 0 };
@@ -36,7 +34,7 @@ namespace sdk
 	[[nodiscard]] static bool world_to_screen( Vector3 pos, D3DXVECTOR2& out )
 	{
 		Vector3 _out = { out.x , out.y , 0 };
-		const auto b = world_to_screen( pos , _out );
+		const auto b = world_to_screen( pos, _out );
 		out.x = _out.x;
 		out.y = _out.y;
 		return b;
@@ -44,6 +42,6 @@ namespace sdk
 
 	[[nodiscard]] static bool world_to_screen( Vector3& pos )
 	{
-		return world_to_screen( pos , pos );
+		return world_to_screen( pos, pos );
 	}
 }

@@ -15,12 +15,13 @@ DWORD __stdcall thread( LPVOID lparam )
 
 	ironsight_base = reinterpret_cast< uintptr_t >( GetModuleHandle( nullptr ) );
 
+	//this pattern might not work on other windows versions but we don't care
 	const auto RtlInsertInvertedFunctionTable = reinterpret_cast< f_RtlInsertInvertedFunctionTable >( helpers::find_pattern_module( "ntdll.dll",
 		"\x8B\xFF\x55\x8B\xEC\x83\xEC\x0C\x53\x56\x57\x8D\x45\xF8\x8B\xFA", "xxxxxxxxxxxxxxxx" ) );
 
 	if ( RtlInsertInvertedFunctionTable )
 	{
-		const auto image_base        = reinterpret_cast< uintptr_t >( lparam );
+		const auto image_base = reinterpret_cast< uintptr_t >( lparam );
 		const auto pimage_dos_header = reinterpret_cast< PIMAGE_DOS_HEADER >( image_base );
 		const auto pimage_nt_headers = reinterpret_cast< PIMAGE_NT_HEADERS >( image_base + pimage_dos_header->e_lfanew );
 
@@ -36,8 +37,8 @@ DWORD __stdcall thread( LPVOID lparam )
 		Sleep( 200 );
 
 	const auto p_device = **reinterpret_cast< uintptr_t*** >( g_render + 0x20 );
-	const auto present  = p_device[17];
-	const auto reset    = p_device[16];	
+	const auto present = p_device[17];
+	const auto reset = p_device[16];
 
 	if ( MH_Initialize() != MH_OK )
 	{
@@ -45,13 +46,13 @@ DWORD __stdcall thread( LPVOID lparam )
 		return 0;
 	}
 
-	if ( MH_CreateHook( reinterpret_cast< LPVOID >( present ) , &hk_present , reinterpret_cast< LPVOID* >( &o_present ) ) != MH_OK )
+	if ( MH_CreateHook( reinterpret_cast< LPVOID >( present ), &hk_present, reinterpret_cast< LPVOID* >( &o_present ) ) != MH_OK )
 	{
 		printf( "[Lazysight] Failed to create hook at Present\n" );
 		return 0;
 	}
 
-	if ( MH_CreateHook( reinterpret_cast< LPVOID >( reset ) , &hk_reset , reinterpret_cast< LPVOID* >( &o_reset ) ) != MH_OK )
+	if ( MH_CreateHook( reinterpret_cast< LPVOID >( reset ), &hk_reset, reinterpret_cast< LPVOID* >( &o_reset ) ) != MH_OK )
 	{
 		printf( "[Lazysight] Failed to create hook at Reset\n" );
 		return 0;

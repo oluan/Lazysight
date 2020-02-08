@@ -1,27 +1,21 @@
 #pragma once
 
 namespace misc
-{
-	
-	static void weapon_recoil() noexcept
+{	
+	static void weapon_recoil( CActor* const plocal_actor ) noexcept
 	{
-		const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
-
 		if ( plocal_actor )
 			plocal_actor->m_pweaponinfo->m_recoil = 0.0f;
 	}
 
-	static void weapon_spread() noexcept
+	static void weapon_spread( CActor* const plocal_actor ) noexcept
 	{
-		const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
-
 		if ( plocal_actor )
 			plocal_actor->m_pweaponinfo->m_spread = 0.0f;
 	}
 
-	static void weapon_fire() noexcept
+	static void weapon_fire( CActor* const plocal_actor ) noexcept
 	{
-		const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
 		const auto ptrigger = reinterpret_cast< byte* >( ironsight_base + 0xA906CD );
 
 		if ( plocal_actor )
@@ -33,19 +27,22 @@ namespace misc
 	
 	static void misc_context() noexcept
 	{
-		if  (config::b_trigger )
-			weapon_fire();
+		const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
+
+		if ( !plocal_actor )
+			return;
+
+		if ( config::b_trigger )
+			weapon_fire( plocal_actor );
 		
 		if ( config::b_recoil )
-			weapon_recoil();
+			weapon_recoil( plocal_actor );
 
 		if ( config::b_spread )
-			weapon_spread();
+			weapon_spread( plocal_actor );
 
 		if ( config::b_stamina )
 		{
-			const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
-
 			if ( plocal_actor )
 			{
 				plocal_actor->m_max_stamina = 999999.0f;
@@ -55,8 +52,6 @@ namespace misc
 
 		if ( config::b_speed )
 		{
-			const auto plocal_actor = *reinterpret_cast< CActor** >( ironsight_base + 0xA88B34 );
-
 			if ( plocal_actor )
 			{
 				plocal_actor->m_speed_running         = 780.000f * static_cast< float >( config::i_speed );
@@ -71,9 +66,6 @@ namespace misc
 				plocal_actor->m_speed_forward_lying   = ( 78.000f * 2.0f ) * static_cast< float >( config::i_speed );
 				plocal_actor->m_speed_rightleft_lying = ( 62.000f * 2.0f ) * static_cast< float >( config::i_speed );
 				plocal_actor->m_speed_back_lying      = ( 54.000f * 2.0f ) * static_cast< float >( config::i_speed );
-				//plocal_actor->m_speed_rise            = 10000.0f; //220.000f
-				//plocal_actor->m_speed_lie_down        = 10000.0f; //160.000f
-				//plocal_actor->m_speed_squat_down      = 10000.0f; //240.000f
 			}
 		}
 	}
