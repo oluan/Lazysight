@@ -31,3 +31,9 @@ Devecchi https://github.com/LuanDevecchi
 iPower https://github.com/GH-iPower/
 
 Charada https://github.com/lucass0
+
+Disclaimer
+---------------
+We don't endorse any P2C with Ironsight.
+
+P2C's using this source: Ninja Cheetos
