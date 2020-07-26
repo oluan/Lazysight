@@ -28,7 +28,7 @@ Credits
 ### Coding the cheat
 Devecchi https://github.com/LuanDevecchi
 
-iPower https://github.com/GH-iPower/
+iPower https://github.com/iPower/
 
 Charada https://github.com/lucass0
 
