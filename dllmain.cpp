@@ -1,4 +1,3 @@
-#include <MinHook.h>
 #include "thirdparty/helpers/helpers.hpp"
 #include "hooks/hooks.h"
 
