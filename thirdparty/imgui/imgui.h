@@ -179,7 +179,6 @@ typedef signed int          ImS32;  // 32-bit signed integer == int
 typedef unsigned int        ImU32;  // 32-bit unsigned integer (often used to store packed colors)
 #if defined(_MSC_VER) && !defined(__clang__)
 #include <d3d9.h>
-#include <d3dx9.h>
 typedef signed   __int64    ImS64;  // 64-bit signed integer (pre and post C++11 with Visual Studio)
 typedef unsigned __int64    ImU64;  // 64-bit unsigned integer (pre and post C++11 with Visual Studio)
 #elif (defined(__clang__) || defined(__GNUC__)) && (__cplusplus < 201100)
